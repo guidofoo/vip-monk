@@ -1,0 +1,830 @@
+!!! Strict
+%html
+  %head
+    %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
+    %title
+      iPod touch 32gb 3ra generacion, caja sellada
+    %base{ :href => "http://www.mercadolibre.com.ar/argentina/ml/" }
+    %link{ :rel => "stylesheet", :href => "http://www.mercadolibre.com.ar/jm/ml.api.webcomponent.CascadingStyleSheetsController?name=VIP3&visualId=STD&templateID=C_CI_TEMPLATE", :type => "text/css" }
+    %script{ :src => "http://www.mercadolibre.com.ar/jm/ml.api.webcomponent.JavaScriptController?name=VIP3&visualId=STD&v=20081007.js" }
+    %style
+      \.ver_plan {
+      font-size:11px;
+      
+      }
+      
+      \.tarjeta-diners , .tarjeta-master , .tarjeta-amex , .tarjeta-tnaranja , .tarjeta-magna , .tarjeta-hipercard , .tarjeta-aura , .tarjeta-visa , .tarjeta-acard, .tarjeta-presto, .tarjeta-bradesco {
+      background-image:url('http://www.mercadolibre.com/org-img/vip3/tarjetas.gif');
+      background-repeat:no-repeat;
+      display : inline ;
+      float : left;
+      width :26px;
+      height:16px;
+      list-style : none;
+      margin-left : 3px;
+      
+      }
+      
+      \.tarjeta-diners {	background-position: 0 -30px;}
+      \.tarjeta-master {	background-position: 0 -76px;}
+      \.tarjeta-amex   { background-position: 0 -122px; }
+      \.tarjeta-tnaranja { background-position: 0 -168px; }
+      \.tarjeta-magna { background-position: 0 -214px; }
+      \.tarjeta-hipercard { background-position: 0 -260px; }
+      \.tarjeta-aura { background-position: 0 -306px; }
+      \.tarjeta-visa { background-position: 0 -352px; }
+      \.tarjeta-acard { background-position: 0 -398px; }
+      \.tarjeta-presto { background-position: 0 -444px; }
+      \.tarjeta-bradesco { background-position: 0 -490px; }
+    %script
+      var valItemId = "123456789";
+      var valItemSite = "MLA";
+      var visualId = "STD";
+      var urlBaseSite = "http://www.mercadolibre.com.ar/";
+      var urlDefault = "http://www.mercadolibre.com.ar/argentina/ml/";
+      var urlBase = "http://"+window.location.host;
+      var oldUrl = "http://www.mercadolibre.com.ar/jm/item?site=MLA&id=123456789";
+      var urlLastCategPath = "";
+      var categId= "##CATEG_ID##";
+      var productId = "0";
+      var valBidSeq = "##VAL_BID_SEQ##";
+      var urlJSSL = "##URL_JSSL##";
+      var cantFotosCargadas = 0;
+      var vid = "";
+      var totalFotos = 0;
+      var srcMainImg = "http://www.mercadolidesa.com.ar/jm/img?s=MLA&f=artsinfoto.gif&v=E";
+      var rotacionDeImagenes = false;
+    %script{ :language => "javascript" }
+      var atlasPoolSufix = "_PA";
+      var urlBaseAtlas = "";
+      var atlasPoolSufixForRegInt = "_PA";
+    %script
+      var urlBase = "http://"+window.location.host;
+      
+      var contentIsEnabled	= true;
+      var autocenterIsEnabled	= true;
+      var loadingIsEnabled	= true;
+      
+      var cnt_width  = '790px';
+      var cnt_src    = urlBase+'/jm/item?act=confirmBid&vip3=Y&id=123456789&site=MLA';
+      var img_src    = '/org-img/vip3/layer/loading230x180.gif';
+      
+      var loading_width  = '230px';
+      var loading_height = '180px';
+      
+      \//var loading_width  = '32' + 'px'
+      \//var loading_height = '32' + 'px'
+      
+      var image = new Image();
+      image.src = '/org-img/vip3/layer/loading230x180.gif';
+  %body
+    %center
+      #containall
+        /
+          \##MENU## es el menu
+        #contmenu.under
+          .menu_der
+            #first_lnk_menu_der
+              %a{ :href => "/" }
+                Index
+            %script
+              setLog();
+            .lnk_menu_der
+              %a{ :href => "/ayuda_home" }
+                Help
+            .lnk_menu_der
+              %a{ :href => "/jm/myML" }
+                My MercadoLibre
+            .lnk_menu_der
+              %a{ :href => "/jm/sell" }
+                Sell your item
+            .lnk_menu_der
+              %a{ :target => "_blank", :href => "/jm/reg" }
+                Sign Up
+          .borra
+          .flota_izq
+            %a{ :href => "/" }
+            .logo_ml
+          .menu_der
+            #bg_menu
+              #cont_buscador
+                %input#as_inner_word.buscador{ :type => "text", :onfocus => "javascript:setFocus()", :onblur => "javascript:setBlur()", :value => "", :maxlength => "60", :name => "as_word" }
+              #bot_buscar
+                %input.buscar{ :type => "submit", :value => "", :onclick => "innerSearch();" }
+        /
+          \##MENU##
+        %link{ :href => "http://ec2-184-73-6-124.compute-1.amazonaws.com/stylesheets/vip.css?1268066703", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+        %script{ :src => "http://ec2-184-73-6-124.compute-1.amazonaws.com/javascripts/vip.js?1268066744", :type => "text/javascript" }
+        %script{ :src => "http://ec2-184-73-6-124.compute-1.amazonaws.com/javascripts/jquery.min.js?1268064959", :type => "text/javascript" }
+        .BigContainer
+          #pathcateg
+            .backlist
+              %span#listButton{ :style => "position: relative; width: 250px; height: 20px;" }
+            .breadcrumb
+              %a.path1{ :href => "/jm/search?as_categ_id=10000" }
+                Celulares y telefonia
+              %img{ :src => "/org-img/prod/arrow_categ.gif", :border => "0", :height => "10", :width => "13" }
+              %a.path1{ :href => "/jm/search?as_categ_id=10001" }
+                Accesorios para celulares
+              %img{ :src => "/org-img/prod/arrow_categ.gif", :border => "0", :height => "10", :width => "13" }
+              %a.path1{ :href => "/jm/search?as_categ_id=10002" }
+                Protectores de pantalla
+              %img{ :src => "/org-img/prod/arrow_categ.gif", :border => "0", :height => "10", :width => "13" }
+              %a.path1{ :href => "/jm/search?as_categ_id=10003" }
+                iPhone
+        /
+          PREHEADER
+        %div
+        /
+          TITULO DEL ITEM
+        #boxgral
+          %table{ :width => "100%", :border => "0", :cellpadding => "0", :cellspacing => "0" }
+            %tr
+              %td{ :width => "41%", :rowspan => "2", :align => "center", :valign => "top" }
+                .marcofoto
+                  %table.photoframe{ :align => "center" }
+                    %tr
+                      %td#tdMainImg{ :align => "center", :width => "280", :height => "280" }
+                        #divMainImg{ :style => "display:inline" }
+                          %a#linkMainImg{ :href => "javascript:showVisor()" }
+                            %img#mainImg{ :src => "http://www.mercadolibre.com.ar/jm/img?s=MLA&f=61826546_3253.jpg&v=E", :border => "none", :align => "top", :alt => "iPod touch 32gb 3ra generacion, caja sellada", :title => "iPod touch 32gb 3ra generacion, caja sellada" }
+              %td{ :width => "59%", :valign => "top", :style => "padding:0 5px 0 10px;" }
+                %h1
+                  iPod touch 32gb 3ra generacion, caja sellada
+                %table{ :width => "100%", :border => "0", :cellpadding => "0", :cellspacing => "0" }
+                  %tr
+                    %td{ :width => "16%", :height => "25" }
+                      Price:
+                    %td{ :width => "84%", :valign => "middle" }
+                      %span.price
+                        $ 1500
+                        %span.decimales
+                          99
+                  %tr
+                  %tr
+                    %td{ :height => "25" }
+                      Location:
+                    %td
+                      Capital Federal (Zona Alto Palermo)
+                  %tr
+                    %td{ :height => "25", :valign => "top" }
+                      #endtxt1
+                    %td{ :height => "25", :valign => "top" }
+                      #endtxt2
+                        %span#endtxt3.font11Grey
+                      %div{ :style => "margin-top: 8px;" }
+                      .purchase
+                        %input#BidButtonTop.but_pri_1{ :type => "button", :value => "Comprar", :title => "Comprar" }
+                      %span.font11
+                        Your purchase is protected.
+                .dashed
+                .box
+                  %table{ :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%" }
+                    %tbody
+                      %tr
+                        %td{ :style => "padding-top: 2px;", :valign => "top", :width => "16%" }
+                          Seller:
+                        %td.datavend{ :valign => "top", :width => "84%" }
+                          %div
+                            %span#Nickname
+                              %span#MyNickname{ :style => "margin-top: 5px; display: inline; float: left; padding-bottom: 2px;" }
+                                Matata
+                              %span{ :title => "" }
+                            %div{ :style => "clear: both;" }
+                          %span.font11{ :style => "clear: both;" }
+                          #CalifPercentage{ :style => "width: auto; clear: both;" }
+                            #puntos
+                              Calification:
+                              95 Points
+                            #posneg
+                              #caja_pos
+                                %span#link_pos
+                                  (96%
+                                %span#img_pos.pos
+                                )
+                              #caja_neg
+                                %span#link_neg
+                                  (4%
+                                %span#img_neg.neg
+                                )
+                          %br
+                          %div{ :style => "clear: both;" }
+                            Sells on this article: 10
+                            %a{ :href => "" }
+                          %br
+        .font11.denunhd
+          Item #123456789
+        #tabsN
+          %ul#description
+            %li#current.TabbedPanelsTab{ :group => "description" }
+              %a{ :href => "javascript:mostrarDescripcion();cambiarEstilos('HDescripci?n',0,'description')" }
+                %span
+                  Description
+            %li.TabbedPanelsTab{ :group => "description" }
+              %a{ :href => "javascript:mostrarFicha();cambiarEstilos('HFichat?cnica',0,'description')" }
+                %span
+                  Tecnical specs
+            %li#HOpinionesdelproducto.TabbedPanelsTab{ :group => "description" }
+              %a{ :href => "javascript:mostrarOpiniones();cambiarEstilos('HOpinionesdelproducto',0,'description')" }
+                %span
+                  %img{ :border => "0", :src => "http://img.mlstatic.com/org-img/listados/new/rank45.gif" }
+                  2 reviews
+                  /
+                    http://opinion.mercadolibre.com.ar/ipod-touch-32-gb-tercera-generacion-584879-VCP
+        #descriptionCont
+          #Descripcin.contentbox
+            %img{ :alt => "", :src => "http://www.digitalplus-miami.com/ml/anuncioipodtouchok32GB.jpg" }
+            /
+        #Fichatcnica.contentbox{ :align => "center", :style => "display: none;" }
+          #catalogTab
+            #fichasolapa
+              .fondonobg
+                %h2
+                  Specs
+              #attr
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      Pantalla:
+                  %li.li_simple_2
+                    Panoramica Multi-Touch de 3,5 pulgadas (en diagonal)
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      USB:
+                  %li.li_simple_2
+                    2.0
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      Bluetooth:
+                  %li.li_simple_2
+                    Si
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      Wi-Fi:
+                  %li.li_simple_2
+                    (802.11b/g)
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      Unidad flash:
+                  %li.li_simple_2
+                    de 32 o 64 GB2
+                %ul.ul_simple
+                  %li.li_simple
+                    %b
+                      Formatos de sonido compatibles:
+                  %li.li_simple_2
+                    AAC (de 8 a 320 Kb/s), AAC protegido (del iTunes Store), MP3 (de 8 a 320 Kb/s), MP3 VBR, Audible (formatos 2, 3 y 4), Apple Lossless, AIFF y WAV
+              #printspecs.printCatalog
+                %a{ :href => "javascript:print();" }
+                  Print specs
+              .Spacer
+        #reviewsTab.contentbox{ :style => "display: none;" }
+          #solopis
+            .fondo
+              %h2
+                Reviewes
+            #attr{ :style => "margin-top: 10px;" }
+              /
+                STARS
+              #promedio
+                %h3
+                  Average
+                %span.promedio
+                  %img{ :src => "/org-img/reviews/45BALLSON.gif", :align => "absbottom" }
+                  %br
+                  over
+                  %b
+                    2 reviews
+              #distribucion
+                %h3
+                  Points distribution
+                .marcadores
+                  Poings
+                  %br
+                  .lblquant
+                    Reviews
+                .colstar
+                  %img{ :src => "/org-img/reviews/5BALLSON.gif", :align => "absbottom" }
+                  %br
+                  .quant
+                    1
+                .colstar
+                  %img{ :src => "/org-img/reviews/4BALLSON.gif", :align => "absbottom" }
+                  %br
+                  .quant
+                    1
+                .colstar
+                  %img{ :src => "/org-img/reviews/3BALLSON.gif", :align => "absbottom" }
+                  %br
+                  .quant
+                    0
+                .colstar
+                  %img{ :src => "/org-img/reviews/2BALLSON.gif", :align => "absbottom" }
+                  %br
+                  .quant
+                    0
+                .colstar
+                  %img{ :src => "/org-img/reviews/1BALLSON.gif", :align => "absbottom" }
+                  %br
+                  .quant
+                    0
+              #separador
+              .Spacer
+            .Spacer
+            #list_reviews
+              %a{ :name => "tab405825" }
+              .contopinion
+                .titcalif
+                  .opcalif
+                    %img{ :src => "/org-img/reviews/4BALLSON.gif", :align => "absbottom" }
+                    |
+                  .optitle{ :style => "" }
+                    El "casi iPhone" mejor que nunca!
+                .opbody
+                  .opautor
+                    %span.autor_rev_link
+                      Author:
+                      %b
+                        Giggsy (20)
+                  .proscons
+                    .pros
+                      %b
+                        Pros:
+                      %br
+                      \- Mejora del procesador, abre juegos y aplicaciones mucho mas r?pido! as? mismo se prende y apaga mas r?pido
+                      %br
+                      \- Mejora grafica: Algunos Juegos se ven bastante mejor que en las versiones anteriores del iPod Touch, esto se debe a que el 3G soporta OPEN GL 2.0.
+                      %br
+                      \- ligeramente mas delgado que el de segunda generacion
+                      %br
+                      \- mayor capacidad de almacenamiento
+                      %br
+                      \- Auriculares con microfono, que permiten usar el grabador de sonidos, Subir y bajar el volumen, detener la cancion o video y realizar llamadas telefonicas usando Skype
+                      %br
+                      \- Voice Control: La misma tecnologia del iPod Shuffle y el iPhone 3Gs que permite controlar distintas funciones usando comandos de voz.
+                      %br
+                      \- Shake contro: agita el ipod mientras reproducis musica para pasar a una pista aleatoria
+                      %br
+                    .contras
+                      %b
+                        Conts:
+                      %br
+                      \- Sigue sin Incluir Sintonizador FM
+                      %br
+                      \- El Safari (navegador Web) sigue sin soportar Java o Flash (Excepto en los videos FLV, Ej: Youtube)
+                      %br
+                      \- El Navegador "GPS" del Google Maps solo funciona estando conectado a internet con wi-fi
+                      %br
+                  .opconcl
+                    %p
+                      %b
+                        Conclusion:
+                      %br
+                      Sigue ofrenciendo las mismas tecnologias que el iPhone, con su pantalla multi-touch y acelerometros. Pero en un producto mas liviano, delgado y econ?mico. Esta tercer generaci?n del iPod touch ofrece grandes mejoras de desempe?o en aplicaciones mas complejas y juegos con mejores gr?ficos. Intentando as?, entrar en el segmento de consolas port?tiles. MUY rapido y como siempre, facil de usar. Lamentablemente nos sigue dejando ese gusto amargo el safari al no soportar paginas en flash, o aplicaciones java. Conclusi?n: Muy recomendable para quien desea siempre llevar sus pel?culas o cap?tulos de series para verlas en una gran pantalla, conectarse a Internet navegando casi como en cualquier computadora. usar programas de mensajer?a instant?nea e incluso realizar llamadas telef?nicas gratuitas utilizando Skype.
+                      %br
+                  .rbroundbox
+                    .rbtop
+                      %div
+                    .rbcontent
+                      .opvote
+                        #votacion405825.votaciondiv{ :style => "display: block;" }
+                          .votetxt
+                            Was this review useful?
+                          .btndiv
+                            %input.btnSI{ :name => "si", :onclick => "javascript:voteReview('405825',true);", :value => "S?", :type => "button" }
+                          .btndiv
+                            %input.btnNO{ :name => "no", :onclick => "javascript:voteReview('405825',false);", :value => "No", :type => "button" }
+                        #notReg{ :style => "margin: 5px 0pt; display: none;" }
+                          ?Te result? ?til esta opini?n?
+                          %img{ :src => "/org-img/t.gif", :width => "8" }
+                          %input{ :name => "si", :onclick => "login('405825',true);", :value => "S?", :src => "/org-img/catalog/pdp/votar_si.gif", :height => "28", :type => "image", :width => "32" }
+                          %input{ :name => "no", :onclick => "login('405825',false);", :value => "No", :src => "/org-img/catalog/pdp/votar_no.gif", :height => "28", :type => "image", :width => "32" }
+                        #error{ :style => "display: none;" }
+                          /
+                            \##MSJ_ERROR##
+                      #votos405825.oputil
+                        %b
+                          37
+                        over 37 users
+                        %b
+                          evaluated this review as useful
+                      #footerReview405825.tks
+                    .rbbot
+                      %div
+                  .opdenu
+                    .link_opden
+                    %a{ :href => "http://www.mercadolibre.com.ar/argentina/ml/org_ayuda.main?as_new_tkt=2190&amp;as_faq_rvw_id=405825&amp;as_subject=Esta+opinion+no+cumple+con+las+politicas+del+sitio" }
+                      Denunciar opini?n
+              .contopinion
+                .titcalif
+                  .opcalif
+                    %img{ :src => "/org-img/reviews/4BALLSON.gif", :align => "absbottom" }
+                    |
+                  .optitle{ :style => "" }
+                    El "casi iPhone" mejor que nunca!
+                .opbody
+                  .opautor
+                    %span.autor_rev_link
+                      Author:
+                      %b
+                        Giggsy (20)
+                  .proscons
+                    .pros
+                      %b
+                        Pros:
+                      %br
+                      \- Mejora del procesador, abre juegos y aplicaciones mucho mas r?pido! as? mismo se prende y apaga mas r?pido
+                      %br
+                      \- Mejora grafica: Algunos Juegos se ven bastante mejor que en las versiones anteriores del iPod Touch, esto se debe a que el 3G soporta OPEN GL 2.0.
+                      %br
+                      \- ligeramente mas delgado que el de segunda generacion
+                      %br
+                      \- mayor capacidad de almacenamiento
+                      %br
+                      \- Auriculares con microfono, que permiten usar el grabador de sonidos, Subir y bajar el volumen, detener la cancion o video y realizar llamadas telefonicas usando Skype
+                      %br
+                      \- Voice Control: La misma tecnologia del iPod Shuffle y el iPhone 3Gs que permite controlar distintas funciones usando comandos de voz.
+                      %br
+                      \- Shake contro: agita el ipod mientras reproducis musica para pasar a una pista aleatoria
+                      %br
+                    .contras
+                      %b
+                        Conts:
+                      %br
+                      \- Sigue sin Incluir Sintonizador FM
+                      %br
+                      \- El Safari (navegador Web) sigue sin soportar Java o Flash (Excepto en los videos FLV, Ej: Youtube)
+                      %br
+                      \- El Navegador "GPS" del Google Maps solo funciona estando conectado a internet con wi-fi
+                      %br
+                  .opconcl
+                    %p
+                      %b
+                        Conclusion:
+                      %br
+                      Sigue ofrenciendo las mismas tecnologias que el iPhone, con su pantalla multi-touch y acelerometros. Pero en un producto mas liviano, delgado y econ?mico. Esta tercer generaci?n del iPod touch ofrece grandes mejoras de desempe?o en aplicaciones mas complejas y juegos con mejores gr?ficos. Intentando as?, entrar en el segmento de consolas port?tiles. MUY rapido y como siempre, facil de usar. Lamentablemente nos sigue dejando ese gusto amargo el safari al no soportar paginas en flash, o aplicaciones java. Conclusi?n: Muy recomendable para quien desea siempre llevar sus pel?culas o cap?tulos de series para verlas en una gran pantalla, conectarse a Internet navegando casi como en cualquier computadora. usar programas de mensajer?a instant?nea e incluso realizar llamadas telef?nicas gratuitas utilizando Skype.
+                      %br
+                  .rbroundbox
+                    .rbtop
+                      %div
+                    .rbcontent
+                      .opvote
+                        #votacion405825.votaciondiv{ :style => "display: block;" }
+                          .votetxt
+                            Was this review useful?
+                          .btndiv
+                            %input.btnSI{ :name => "si", :onclick => "javascript:voteReview('405825',true);", :value => "S?", :type => "button" }
+                          .btndiv
+                            %input.btnNO{ :name => "no", :onclick => "javascript:voteReview('405825',false);", :value => "No", :type => "button" }
+                        #notReg{ :style => "margin: 5px 0pt; display: none;" }
+                          ?Te result? ?til esta opini?n?
+                          %img{ :src => "/org-img/t.gif", :width => "8" }
+                          %input{ :name => "si", :onclick => "login('405825',true);", :value => "S?", :src => "/org-img/catalog/pdp/votar_si.gif", :height => "28", :type => "image", :width => "32" }
+                          %input{ :name => "no", :onclick => "login('405825',false);", :value => "No", :src => "/org-img/catalog/pdp/votar_no.gif", :height => "28", :type => "image", :width => "32" }
+                        #error{ :style => "display: none;" }
+                          /
+                            \##MSJ_ERROR##
+                      #votos405825.oputil
+                        %b
+                          37
+                        over 37 users
+                        %b
+                          evaluated this review as useful
+                      #footerReview405825.tks
+                    .rbbot
+                      %div
+                  .opdenu
+                    .link_opden
+                    %a{ :href => "http://www.mercadolibre.com.ar/argentina/ml/org_ayuda.main?as_new_tkt=2190&amp;as_faq_rvw_id=405825&amp;as_subject=Esta+opinion+no+cumple+con+las+politicas+del+sitio" }
+                      Denunciar opini?n
+        %br
+        %br
+        #boxgral
+          %span.tith2
+            Shipping and payment preferences
+          %div{ :style => "margin-left: 10px;" }
+            .titles2
+              Payment
+            %div{ :style => "margin-left: 10px;" }
+              \- Visa
+              %img{ :src => "http://www.mercadolibre.com.ar/org-img/vip3/mcard/mcards_mla.gif" }
+            %div{ :style => "margin-left: 10px;" }
+              \- MasterCard
+              %img{ :src => "http://www.mercadolibre.com.ar/org-img/vip3/mcard/mcards_mla.gif" }
+            %div
+              %br
+              %table{ :cellpadding => "0", :cellspacing => "0", :width => "100%" }
+                %tbody
+                  %tr
+                    %td
+                      #boxmpmedios
+                        #mpOpen2
+                          #mptoptitle
+                            %a{ :href => "/jm/ml.faqs.portalFaqs.FaqsController?axn=verFaq&amp;faqId=3797&amp;categId=MP", :target => "_blank" }
+                              %img{ :src => "/org-img/vip3/mpagotitle.gif", :border => "0" }
+                        .mediosBox
+                          %img{ :src => "/org-img/vip3/mcard/mcards_mla.gif" }
+                          %img{ :src => "/org-img/vip3/mcard/med_ar_296x23.gif" }
+                          %div{ :style => "margin: 5px 0pt; color: rgb(18, 121, 40); font-size: 11px;" }
+                            Up to 12 payments with Hipotecario, Standard and Patagonia credit cards.
+                          %div{ :style => "margin-top: 8px;" }
+                            %img{ :src => "http://www.mercadolibre.com/org-img/vip3/ep/ppc17x17.gif", :align => "absmiddle", :height => "17", :width => "17" }
+                            %a{ :target => "_blank", :href => "http://www.mercadopago.com/argentina/ml/p_loadhtml?as_menu=M06S03&amp;as_html_code=PROTECCION_COMP02" }
+                              Your purchase is protected
+                            until $6000
+                            %span.decimales
+                              00
+            %br
+            .dashedgreyline
+            .titles2
+              Shipping
+            %div{ :style => "margin-left: 10px;" }
+              \- A convenir
+            %br
+            %div
+        %br
+        %br
+        /
+          PREGUNTAS
+        #tabsN
+          %ul#Community
+            %li#current.TabbedPanelsTab{ :group => "Community" }
+              %a{ :href => "javascript:mostrarPreguntas();cambiarEstilos('HPreguntasalvendedor',1,'Community')" }
+                %span
+                  Questions to seller
+            %li#HCalificacionesdecompradores.TabbedPanelsTab{ :group => "Community" }
+              %a{ :href => "javascript:mostrarCalif()" }
+                %span
+                  Buyer calificattions
+        #CommunityCont
+          #Preguntasalvendedor.contentbox
+            %a{ :name => "toQuest" }
+            %div{ :style => "text-align:right; width:99%" }
+            #bigQues
+              %a{ :name => "toQuest" }
+              #tableQues1.wrap1
+                %a{ :name => "toQuest" }
+                .wrap2
+                  %a{ :name => "toQuest" }
+                  .side
+                    %b
+                      Question
+                    %br
+                  .bloque
+                    pregunta
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'QUES','Y')" }
+                      Denounce
+                .wrap3
+                  .side
+                    %b
+                      Answer
+                    %br
+                    %span.font10
+                      03/04/2010 15:28
+                  .bloque
+                    compralo dale copate
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'ANSW','Y')" }
+                      Denounce
+            #bigQues
+              %a{ :name => "toQuest" }
+              #tableQues1.wrap1
+                %a{ :name => "toQuest" }
+                .wrap2
+                  %a{ :name => "toQuest" }
+                  .side
+                    %b
+                      Question
+                    %br
+                  .bloque
+                    otra pregunta
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'QUES','Y')" }
+                      Denounce
+                .wrap3
+                  .side
+                    %b
+                      Answer
+                    %br
+                    %span.font10
+                      03/04/2010 15:44
+                  .bloque
+                    a vos no te vendo
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'ANSW','Y')" }
+                      Denounce
+            #bigQues
+              %a{ :name => "toQuest" }
+              #tableQues1.wrap1
+                %a{ :name => "toQuest" }
+                .wrap2
+                  %a{ :name => "toQuest" }
+                  .side
+                    %b
+                      Question
+                    %br
+                  .bloque
+                    1500 mangos?? ladron!!
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'QUES','Y')" }
+                      Denounce
+                .wrap3
+                  .side
+                    %b
+                      Answer
+                    %br
+                    %span.font10
+                      03/04/2010 15:54
+                  .bloque
+                    sos un rata
+                  .denuncia2
+                    %a.font10{ :href => "javascript:showDenunForm(864191029,'ANSW','Y')" }
+                      Denounce
+            .askq-button
+              %table{ :width => "250", :border => "0", :align => "center" }
+                %tr
+                  %td{ :align => "center" }
+                    %div{ :style => "width:auto;overflow:hidden;" }
+                      %input.but_sec_2{ :type => "button", :value => "Ask seller a question", :title => "Ask seller a question", :onclick => "javascript:makeQues()" }
+          #Calificacionesdecompradores.contentbox{ :style => "display:none" }
+            #historyBuyer
+              %center
+                %center
+                  .titcals.titles2
+                    Califications received from the sale of this article.
+                  %div{ :style => "text-align: right;" }
+                  .wrap1
+                    .side-icon
+                      %img{ :src => "/org-img/calif/pos_fb2.gif", :align => "absmiddle", :height => "16", :width => "16" }
+                    .bloque-cal
+                      .tit_cal
+                        .nickcal
+                          %b
+                            Zizou (120)
+                        .date-cal
+                          03/05/2010 18:38
+                      todo magico, 10 puntos, recomendable
+                    .separator2
+                    .side-icon
+                      %img{ :src => "/org-img/calif/neu_fb2.gif", :align => "absmiddle", :height => "16", :width => "16" }
+                    .bloque-cal
+                      .tit_cal
+                        .nickcal
+                          %b
+                            Giggsy (20)
+                        .date-cal
+                          03/05/2010 19:05
+                      que se yo, ni fu, ni fa
+                    .separator2
+                    .side-icon
+                      %img{ :src => "/org-img/calif/neg_fb2.gif", :align => "absmiddle", :height => "16", :width => "16" }
+                    .bloque-cal
+                      .tit_cal
+                        .nickcal
+                          %b
+                            pipita higuain (50)
+                        .date-cal
+                          03/05/2010 19:13
+                      un desastre viejoo!!! pedi un 4 y me mando un pomelo
+                    .separator2
+                    %br
+                    .gotop{ :style => "margin-right: 10px;" }
+                      %a{ :href => "http://www.mercadolibre.com.ar/argentina/ml/org_profiles.p_detalle_nick?an_cust_id=84804080" }
+                        View all califications
+        %br
+        /
+          BOX EDUCATION
+        .learning2
+          %div{ :style => "margin: 4px 8px;" }
+            %span.tith2
+              Learn about MercadoLibre
+          %table{ :style => "margin-bottom: 6px; width: 97%;", :align => "center", :border => "0" }
+            %tbody
+              %tr
+                %td
+                  \-
+                  %a{ :href => "/jm/ml.faqs.portalFaqs.FaqsController?axn=verFaq&amp;faqId=2400&amp;categId=BUY" }
+                    How to buy
+                  %br
+                  \-
+                  %a{ :href => "p_loadhtml?as_menu=CSEG&amp;as_html_code=CSEG03" }
+                    Advices for a succesful transaction
+                %td
+                  \-
+                  %a{ :href => "p_loadhtml?as_menu=M06S00&amp;as_html_code=MERCADOLIBRE_SEGURO" }
+                    Why MercadoLibre is safe
+                  %br
+                  \-
+                  %a{ :href => "/jm/ml.faqs.portalFaqs.FaqsController?axn=verFaq&amp;faqId=2403&amp;categId=AFBUY" }
+                    How I pay my purchase
+                  %br
+        %br
+        %br
+        /
+          ART Vendedor
+        %div
+          #ItemsSellerFrame{ :style => "clear: both;" }
+            %br
+            .roundboxFlex
+              %h2
+                More items from seller
+              .boxB
+                %table.tableBox{ :cellpadding => "0", :cellspacing => "0" }
+                  %tbody
+                    %tr
+                      %td
+                        .itemBox
+                          %a{ :href => "http://www.mercadolibre.com.ar/jm/item?site=MLA&amp;id=78857359" }
+                            %img{ :src => "http://img1.mlstatic.com/jm/img?s=MLA&amp;f=59216897_6166.jpg&amp;v=I", :alt => "Filmadora Jvc Everio Gz-mg630 Disco Rigido 60gb Modelo 2009", :border => "0", :height => "90", :vspace => "5", :width => "90" }
+                          .titleArt
+                            %span.font11
+                              %a{ :href => "http://www.mercadolibre.com.ar/jm/item?site=MLA&amp;id=78857359" }
+                                Filmadora Jvc Everio Gz-mg630 Disco Rigido 60gb Modelo 2009
+                          .pay
+                            %span.price2
+                              $ 1800
+                              %span.decimales
+                                00
+                .gotop
+                  %a.bl3n11{ :href => "http://listado.mercadolibre.com.ar/_CustId_84804080" }
+                    View more
+            .left-bot
+              .right-bot
+        #footer_cont
+          .footer_reng
+          .footer_reng
+            %a{ :href => "http://www.mercadolibre.com.ar/argentina/ml/org_theme.p_main?as_theme_id=NEW_SOBRE_ML" }
+              About MercadoLibre
+            |
+            %a{ :href => "http://www.mercadolibre.com.ar/sitemap.html" }
+              Site Map
+            |
+            %a{ :href => "http://www.mercadolibre.com.ar/seguro_home.html" }
+              Politics
+            |
+            %a{ :href => "http://www.mercadolibre.com.ar/argentina/ml/p_loadhtml?as_menu=CSEG&amp;as_html_code=CSEG01" }
+              Security center
+            |
+            %a{ :href => "http://www.mercadopago.com/argentina/ml/p_loadhtml?as_menu=M06S03&amp;as_html_code=PROTECCION_COMPRADOR" }
+              Buyer protection program
+            |
+            %a{ :href => "http://opinion.mercadolibre.com.ar" }
+              Catalog and reviews
+          .footer_reng{ :align => "center" }
+            %b
+              Argentina
+            |
+            %a{ :href => "http://www.mercadolivre.com.br" }
+              Brazil
+            |
+            %a{ :href => "http://www.mercadolibre.com.co" }
+              Colombia
+            |
+            %a{ :href => "http://www.mercadolibre.co.cr" }
+              Costa Rica
+            |
+            %a{ :href => "http://www.mercadolibre.cl" }
+              Chile
+            |
+            %a{ :href => "/jm/ml.track.me?k1=FOOT&amp;k2=EBAY&amp;go=http://www.ebay.com/" }
+              eBay
+            |
+            %a{ :href => "http://www.mercadolibre.com.ec" }
+              Ecuador
+            |
+            %a{ :href => "http://www.mercadolibre.com.mx" }
+              Mexico
+            |
+            %a{ :href => "http://www.mercadolibre.com.pa" }
+              Panama
+            |
+            %a{ :href => "http://www.mercadolibre.com.pe" }
+              Peru
+            |
+            %a{ :href => "http://www.mercadolibre.com.do" }
+              Rep. Dominicana
+            |
+            %a{ :href => "http://www.mercadolibre.com.uy" }
+              Uruguay
+            |
+            %a{ :href => "http://www.mercadolibre.com.ve" }
+              Venezuela
+          #footer_fin
+            El uso de este sitio web implica la aceptaci&oacute;n de los
+            %a{ :target => "_blank", :href => "http://www.mercadolibre.com.ar/seguro_terminos.html" }
+              T&eacute;rminos y Condiciones
+            y de las
+            %a{ :href => "http://www.mercadolibre.com.ar/org-img/html/MLA/seguro_privacidad.html" }
+              Pol&iacute;ticas de Privacidad
+            de MercadoLibre S.A.
+            %br
+            Copyright &copy; 1999-2010 MercadoLibre S.A.
+        %br
+        %br
+    %center
+      gen: 637 ms
