@@ -1,3 +1,4 @@
+require "test/unit"
 require "test_helper"
 
 class CssTest < Test::Unit::TestCase

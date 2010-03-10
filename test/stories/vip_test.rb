@@ -7,7 +7,7 @@ class VIPTest < Test::Unit::TestCase
 
   feature "View item page" do
     setup do
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada"
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", description: "description"
     end
 
     scenario "A user visiting the page should see the title" do
@@ -15,5 +15,12 @@ class VIPTest < Test::Unit::TestCase
 
       assert_contain "iPod touch 32gb 3ra generacion, caja sellada"
     end
+
+    scenario "A user visiting the page should see the description" do
+      visit "/item/#{@item.id}"
+
+      assert_contain "description"
+    end
+
   end
 end
