@@ -20,11 +20,11 @@ class Main < Monk::Glue
 end
 
 # Connect to Redis database.
-Ohm.connect(settings(:redis))
+#Ohm.connect(settings(:redis))
 
 # Connect to the Sqlite3 database.
 db = settings(:sequel)
-Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db])
+Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db.merge(logger: Logger.new($stdout))])
 
 # Load all application files.
 Dir[root_path("app/**/*.rb")].each do |file|
