@@ -44,14 +44,16 @@ class Monk < Thor
     require "init"
   end
 
-  desc "migrate", "Migrates the database"
-  def migrate
+  desc "migrate VERSION = latest", "Migrates the database"
+  def migrate(version = nil)
     invoke :init
 
     require "sequel/extensions/migration"
 
-    version = ENV["VERSION"] ? ENV["VERSION"].to_i : nil
+    version = version.to_i if version
+
     puts "Migrating to version #{ version || "<latest>" }"
+
     Sequel::Migrator.apply(Sequel::Model.db, "db/migrations", version)
   end
 
