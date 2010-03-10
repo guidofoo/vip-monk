@@ -1,6 +1,6 @@
 class Main
   get "/items/:id" do
-    @item = nil
+    @item = Item.find(id: params[:id])
 
     haml :"items/show"
   end

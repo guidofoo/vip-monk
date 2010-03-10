@@ -22,8 +22,8 @@ end
 # Connect to redis database.
 Ohm.connect(settings(:redis))
 
-# Sequel.oracle host: "ec2-75-101-186-222.compute-1.amazonaws.com", user: "ruby", password: "ruby", port: 1521
-Sequel.sqlite database: "development.sqlite3"
+Sequel.oracle host: "ec2-75-101-186-222.compute-1.amazonaws.com", user: "ruby", password: "ruby", port: 1521
+# Sequel.sqlite database: "development.sqlite3"
 
 # Load all application files.
 Dir[root_path("app/**/*.rb")].each do |file|

@@ -1,0 +1,1912 @@
+2010-02-28  KUBO Takehiro  <kubo@jiubao.org>
+	* NEWS: add changes between 2.0.3 and 2.0.4.
+	* VERSION: change the version to 2.0.3.
+	* ext/oci8/stmt.c: fix segmentation fault when OCI8::Cursor#fetch
+	    is called prior to OCI8::Cursor#exec.
+	* ext/oci8/oci8.c: minor fix in rdoc comment.
+
+2010-02-27  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/datetime.rb: fix a problem that fractional seconds are lost
+	    when Time value is bound to TIMESTAMP.
+	    (reported by Raimonds Simanovskis)
+
+2010-02-27  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c, ext/oci8/extconf.rb, ext/oci8/oci8.h: fix for
+	    old Oracle versions, which lack declarations of OCIMsg, oraub8,
+	    orasb8 and OCI_DURATION_PROCESS.
+	* ext/oci8/ocihandle.c: fix for mingw compiler.
+
+2010-02-27  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.yml, ext/oci8/error.c, ext/oci8/oci8.h,
+	  ext/oci8/ocinumber.c: fix for Oracle 8.0 client, which doesn't
+	    have OCIMessageOpen() and OCIMessageGet().
+	* ext/oci8/oci8.c: add a new method OCI8.error_message to get
+	    a error message which depends on NLS_LANGUAGE.
+
+2010-02-09  KUBO Takehiro  <kubo@jiubao.org>
+	* dist-files: add ext/oci8/oranumber_util.c and
+	    ext/oci8/oranumber_util.h.
+	    (reported by Raimonds Simanovskis)
+
+2010-02-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c, ext/oci8/oranumber_util.c,
+	  ext/oci8/oranumber_util.h: change the declaration of
+	    oranumber_to_str() to prevent buffer overflow by
+	    unexpected invalid Oracle number internal data.
+
+2010-02-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c, ext/oci8/oci8.h: add oci8_raise_by_msgno()
+	    to retrieve a Oracle error message which depends on NLS_LANGUAGE.
+	* ext/oci8/oranumber_util.c, ext/oci8/oranumber_util.h,
+	  ext/oci8/extconf.rb: add handwritten conversion functions from
+	    OCINumber internal representation to string and vice versa.
+	* ext/oci8/ocinumber.c: 1. use handwritten conversion functions
+	    instead of OCI functions to convert OraNumber to string
+	    and vice varse. 2. add OraNumber#dump.
+	* test/test_oranumber.rb: add test cases to check conversion from
+	    OraNumber to string and vice varse.
+
+2010-02-02  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c: fix to support NUMBERS with scale larger
+	    than 38 by using scientific number notation to convert OraNumber
+	    to BigDecimal. OraNumber#to_i is also fixed.
+	    (reported by Raimonds Simanovskis)
+
+2010-01-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c: Use OCIErrorGet() to retrieve the error message
+	    when the OCI return code is OCI_NO_DATA.
+	    (reported by Raimonds Simanovskis)
+
+2009-12-06  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c: 1. fix segv when GC starts while initializing
+	    a bind object for object type. (reported by Remi Gagnon)
+	    2. fix memory leak about 30 bytes per one bind object for object
+	    type.
+
+2009-11-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c: fix segv when binding a collection of string.
+	    (reported by Raimonds Simanovskis)
+
+2009-10-26  KUBO Takehiro  <kubo@jiubao.org>
+	* NEW: fix typo.
+	* dist-files, ext/oci8/.document: add ocihandle.c.
+	* ext/oci8/ocihandle.c: add private methods OCIHandle#attr_get_*,
+	    OCIHandle#attr_set_* and their rdoc comments.
+
+2009-10-23  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/ocihandle.c: add ocihandle.c and move OCIHandle
+	    definitions from oci8lib.c to the file.
+
+2009-10-21  KUBO Takehiro  <kubo@jiubao.org>
+	* NEWS: add changes between 2.0.2 and 2.0.3.
+	* VERSION, Makefile: change the version to 2.0.3.
+	* ext/oci8/oci8.c: fix typo.
+	* ext/oci8/apiwrap.yml: add OCIIntervalFromText() prototype.
+
+2009-10-18  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c: Add workarounds for Oracle 9.2.0.1.
+	* lib/oci8/datetime.rb: Change the unit of OCI8::BindType::IntervalDS
+	    from day to second. Add OCI8::BindType::IntervalDS.unit and
+	    OCI8::BindType::IntervalDS.unit=.
+	* test/test_datetime.rb: Fix tests for the above changes.
+
+2009-10-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: Add a workaround for Oracle 9.2.0.1 when clearing
+	    a client identifier.
+	* ext/oci8/oci8lib.c: Fix a segv when canceling a non-blocking
+	    execution.
+	* test_appinfo.rb: Fix temporarily to prevent a segmentation fault
+	    under Oracle 9.2.0.1.
+	* test/test_oci8.rb: Fix temporarily to prevent a segmentation fault
+	    under Oracle 9.2.0.1. Fix for BigDecimal bundled in ruby 1.8.5.
+	* test/test_oranumber.rb: Fix for Oracle 9.2. Comparing float values
+	    by <=> is too sensitive to use it in tests.
+
+2009-10-06  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c: Add a global function OraNumber(obj) as a
+	    shortcut of OraNumber.new(obj) as Rational and BigDecimal do.
+	    Changes the return type of the four rules of arithmetic;
+	    addition, subtraction, multiplication and division. It was
+	    OraNumber, but now it depends on the operand.
+	* lib/oci8/bindtype.rb: Add OCI8::BindType::BigDecimal and
+	    OCI8::BindType::Rational. Change the default data type for
+	    number column which fit neither Integer nor Float from
+	    OraNumber to BigDecimal.
+	* lib/oci8/oci8.rb: Fix for OCI8::BindType::Mapping to accept
+	    a class name instead of the class object to support
+	    OCI8::BindType::BigDecimal and OCI8::BindType::Rational without
+	    requiring 'bigdecimal' and 'rational'.
+	* spec/oranumber_spec.rb: Add a spec file for OraNumber arithmetic.
+	* test/test_oci8.rb: Add tests for OCI8::BindType::BigDecimal and
+	    OCI8::BindType::Rational.
+
+2009-10-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: Add constants missing in Oracle client prior to 10g.
+	* ext/oci8/oraconf.rb:
+	    1. Fix for ruby 1.8.5 with Oracle 8.x which needs some object
+	       files to link with.
+	       (reported by Jayson Cena)
+	    2. Revise the error message under the sudo environemnt.
+	    3. Print not only error message but also the error backtrace when
+	       oraconf.rb fails.
+	* lib/oci8/object.rb: Fix to accept nil attribute in object type's
+	    constructors. This works only for simple data types such as number,
+	    string. But it doesn't for complex types such as object types.
+	    (requested by Remi Gagnon)
+	* spec/object_type_spec.rb: Add a test for object type's constructors.
+
+2009-09-22  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/.document, lib/oci8/datetime.rb: 1. Add
+	    OCI8::BindType.default_timezone and OCI8::BindType.default_timezone=.
+	    2. Change the logic to convert to Time and DateTime to adapt DST.
+	    3. Use new features of Time class in ruby 1.9.2 if they are available.
+	    4. Add rdoc comments.
+	* spec/fetch_datetime8_spec.rb, spec/fetch_datetime_spec.rb,
+	  spec/fetch_time8_spec.rb, spec/fetch_time_spec.rb,
+	  spec/spec_helper.rb: Add tests for OCI8::BindType::DateTime and
+	    OCI8::BindType::Time.
+
+2009-09-13  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c, ext/oci8/oci8.h, test/test_clob.rb: Change
+	    OCI8::LOB#write to accept an object which is not a String and
+	    doesn't respond to 'to_str' as IO#write does.
+	    (requested by Christopher Jones)
+
+2009-09-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, lib/oci8.rb.in: Fixed for ruby 1.9.2 preview1.
+	    (pointed by Raimonds Simanovskis)
+
+2009-09-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: Fixed to compile for AIX instant clients.
+	    (reported by Kazuya Teramoto)
+
+2009-06-09  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8lib.c: Change the initial polling interval of
+	    non-blocking mode for ruby 1.8 from 100 msec to 10 msec, which
+	    is same with ruby-oci8 1.0.
+	* ext/oci8/oci8.c: Change the default setting of non-blocking mode
+	    for ruby 1.9 to true. Revise rdoc comments.
+
+2009-06-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: revise rdoc comments.
+
+2009-06-05  KUBO Takehiro  <kubo@jiubao.org>
+	* Makefile: check rdoc version when making rdoc documentation.
+	    The rdoc version must be 2.4.
+	* ext/oci8/.document, ext/oci8/oci8.c, lib/.document,
+	  lib/oci8/.document, lib/oci8/oci8.rb: fix rdoc comments a bit.
+
+2009-05-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c, lib/oci8/datetime.rb, lib/oci8/object.rb:
+	    add DATE datatype support in object types.
+
+2009-05-19  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c: delete OCI8::BindType::Fixnum.
+	* lib/oci8/compat.rb: add OCI8::BindType::Fixnum as an alias
+	    of OCI8::BindType::Integer.
+	* ext/oci8/extconf.rb: change extconf.rb's argument value of
+	    '--with-oracle-version' to accept dotted version such as
+	    '9.2.0.'
+	* ext/oci8/oraconf.rb: When extconf.rb fails and it is run
+	    by sudo command, change the error message to notice that
+	    'sudo' may unset environment variables.
+
+2009-05-18  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: revise rdoc comments for OCI8#ping and
+	    OCI8#client_identifier=. Add OCI8#module=, OCI8#action= and
+	    OCI8#client_info.
+	* test/test_appinfo.rb: add test cases for OCI8#module=,
+	    OCI8#action= and OCI8#client_info.
+
+2009-05-17  KUBO Takehiro  <kubo@jiubao.org>
+	* NEWS: add changes between 2.0.1 and 2.0.2.
+	* VERSION: change version to 2.0.2.
+	* dist-files: append newly added files.
+	* ext/oci8/oci8.c: fix OCI8#ping not to raise an exception
+	    when OCIPing() failed. It should returns true or false.
+	* ext/oci8/oci8lib.c: Memory allocated by xmalloc() should be
+	    freed by xfree().
+
+2009-05-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c, ext/oci8/extconf.rb, ext/oci8/oci8.h:
+	    fix the native library name in error messages from oci8lib.so
+	    to oci8lib_18.so or oci8lib_191.so.
+	* ext/oci8/ocinumber.c, test/test_oranumber.rb: fix OraNumber.new
+	    to accept BigDecimal and Rational.
+	* ext/oci8/bind.c, test/test_oci8.rb: implicitly convert the
+	    specified number to Float when the bind handle is for Float.
+	* ext/oci8/attr.c: fix for Oracle client which doesn't have
+	    OCIRowidToChar().
+	* ext/oci8/oci8.c, test/test_appinfo.rb, test/test_all.rb, dist-files:
+	    add new methods OCI8#ping and OCI8#client_identifier=.
+	    add test cases.
+	* ext/oci8/oci8lib.c: fix a bug for Oracle 8.0.
+	* lib/oci8/oci8.rb: add a convenient method OCI8#select_one
+	    to fetch one row.
+
+2009-04-18  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: move OCI8::BindType module to bindtype.rb.
+	* lib/oci8/bindtype.rb: added. This defines OCI8::BindType.
+	* lib/oci8.rb.in: require 'oci8/bindtype.rb'
+
+2009-04-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/encoding.c, ext/oci8/lob.c, ext/oci8/metadata.c,
+	  ext/oci8/oci8.c: suppress "warning C4761: integral size mismatch
+	  in argument; conversion supplied" when compiled by Visual C++.
+
+2009-04-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.yml, ext/oci8/env.c, ext/oci8/extconf.rb,
+	  ext/oci8/oci8.h, ext/oci8/oci8lib.c: OCIEnv is initialized
+	    when it is needed. This makes a basis to enable an event
+	    notification after "require 'oci8'."
+	* test/test_all.rb: fix a bug added four days ago.
+
+2009-04-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/oci8lib.c, ext/oci8/ocinumber.c,
+	  ext/oci8/metadata.c, ext/oci8/object.c: pass an OCIError to
+	    OraNumber functions if it can. (This is the first step to
+	    delay OCIEnv initialization.)
+
+2009-04-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: Gets ORACLE_HOME from the Windows regitry
+	    by enumerating subkeys of \\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE.
+
+2009-04-12  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb, test/test_encoding.rb: The string bind length should
+	    be got from the string bytesize converted to OCI8.encoding.
+
+2009-04-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c: OCI8::BLOB#read should return ASCII-8BIT.
+	    OCI8::BLOB#write should not convert the specified string
+	    to OCI8.encoding.
+	* test/test_dbi.rb: suppress warning: "shadowing outer local
+	    variable - i"
+	* test/test_all.rb, test/test_encoding.rb: add string encoding
+	    tests.
+
+2009-04-12  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/dbd/OCI8.rb: fix DBI::DBD::OCI8::BindType::DBIStatementHandle
+	    to pass a newly added sanity check in dbi 0.4.1.
+	    (reported by Dirk Herzhauser)
+	* test/test_all.rb: fix to use dbi installed as a rubygem.
+
+2009-04-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c: fix an error when executing "select NULL from dual".
+	    http://rubyforge.org/forum/forum.php?thread_id=32468&forum_id=1078
+	    (contributed by Raimonds Simanovskis)
+
+2009-03-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8.h, ext/oci8/oraconf.rb:
+	    fix a problem when compiling with Oracle 8.0.
+	    (reported by Axel Reinhold)
+
+2009-03-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8.h: fix a problem when
+	    compiling with Oracle 9.2.
+	    (reported by Axel Reinhold)
+	* ext/oci8/apiwrap.yml: suppres warnings 'discards qualifiers
+	    from pointer target type' when compiling with Oracle 8i.
+
+2009-03-17  KUBO Takehiro  <kubo@jiubao.org>
+	* NEWS: add a new file.
+	* VERSION: change version to 2.0.1.
+	* Makefile: add targets to make a binary gem for Windows.
+	* dist-files: add NEWS
+	* ext/oci8/extconf.rb, lib/oci8.rb.in: rename oci8lib.so
+	    to oci8lib_18.so and oci8lib_191.so. The renamed name
+	    depends on the ruby version.
+	* lib/oci8/datetime.rb: fix the fetched type for date column
+	    when using Oracle 8.x.
+	* ruby-oci8.gemspec: fix to make a binary gem which contains
+	    both oci8lib_18.so and oci8lib_191.so.
+
+2009-03-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.yml: add prototypes for OCIServerVersion() and
+	    OCIServerRelease().
+	* ext/oci8/oci8.c: (1) add a private method OCI8#oracle_server_vernum,
+	    which returns Oracle server version number.
+	    (2) fix a class method OCI8.oracle_client_vernum when using Oracle
+	    client 10.1 or lower.
+	* lib/oci8/datetime.rb: fix year information when fetching a date
+	    whose year is between A.D. 1 and A.D. 139.
+	* lib/oci8/oci8.rb: (1) add OCI8#oracle_server_version.
+	*   (2) change the default data type for timestamp with time zone
+	    from DateTime to Time.
+
+2009-03-11  KUBO Takehiro  <kubo@jiubao.org>
+	* oraconf.rb: fix big/little endian checking problem on Mac OS X ppc.
+	    (contributed by unknown. See: Bug ID 24284 on rubyforge.)
+
+2009-02-15  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c: fix array DML and DateTime object problem.
+	    OCI8::Cursor#bind_param_array(key, array_of_datetime) didn't
+	    work. (Reported by Leoš Bitto)
+	* test/test_array_dml.rb: fix to test array DML and DateTime object.
+
+2009-02-10  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/oci8.h, ext/oci8/stmt.c: fix array DML
+	    and DateTime object problem. It didn't work with bind classes
+	    which overwrite 'set' and 'get'. (Reported by Leoš Bitto)
+	* test/test_array_dml.rb: fix to test array DML and DateTime object.
+
+2009-02-08  KUBO Takehiro  <kubo@jiubao.org>
+	* VERSION: change version from 2.0-svn to 2.0.0 to pass ruby
+	    gem's version string validator.
+	* ruby-oci8.gemspec: added.
+	* ext/oci8/extconf.rb, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/win32.c: 1. add OCI8::Win32Util.dll_path to
+	    retrieve Oracle home location from the OCI.DLL location.
+	    2. add OCI8::Win32Util.enum_homes to get Oracle home and
+	    NLS_LANG pairs in Windows registry.
+	* lib/oci8/encoding-init.rb: get NLS_LANG from Windows registry
+	    if environment variable NLS_LANG is not set.
+	* ext/oci8/oraconf.rb: Change the output encoding of sqlplus to
+	    US7ASCII by setting NLS_LANG. If the output encoding is
+	    incompatible with the default external encoding, it raises
+	    'invalid byte sequence' when using ruby 1.9.
+	* lib/oci8/datetime.rb: fix for ruby 1.9. Ruby 1.9 Time
+	    class's resolution is nanosecond.
+	* dist-files: add dist-files, ruby-oci8.gemspec and ext/oci8/win32.c.
+
+2009-02-06  KUBO Takehiro  <kubo@jiubao.org>
+	* setup.rb: 1. install lib/**/*.yml flies also.
+	    (It is pointed by Nate Wiger that encoding.yml is not installed.)
+	    2. exclude .svn or .git directories on installation.
+	* lib/oci8/oci8.rb: A private method define_a_column was renamed
+	    to define_one_column to prevent activerecord oracle adapter
+	    and oracle enhanced adapter from redefining the method.
+	* dist-files: add newly added file names which must be included
+	    in gem or tar.gz packages.
+
+2009-02-01  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/dbd/OCI8.rb: add code for ruby-dbi 0.4 type conversion.
+	* test/test_dbi.rb: suppress deprecated warnings while running
+	    test_bind_dbi_data_type.
+	* test/test_dbi_clob.rb: fix a problem when running this
+	    file directly.
+
+2009-01-31  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: fix for Oracle 11.1.0.7.0 instant
+	    client rpm package. The directory tree is a bit different
+	    with that of 11.1.0.6.0 or earlier.
+	    (reported by Luis Parravicini.)
+
+2009-01-31  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/DBD/OCI8/OCI8.rb: renamed to lib/dbd/OCI8.rb.
+	* lib/dbd/OCI8.rb: 1. renamed from lib/DBD/OCI8/OCI8.rb
+	    2. fix USED_DBD_VERSION from 0.2 to 0.4.
+	    3. add DBI::DBD::OCI8.driver_name
+	    (changes for ruby-dbi 0.4 contributed by James Cao.)
+
+2009-01-13  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8.rb.in, lib/oci8/encoding-init.rb: (ruby 1.9) set
+	    OCI8.encoding by querying NLS_LANG. If DEFAULT_OCI8_ENCODING
+	    is defined, use it by default.
+	* lib/oci8/encoding.yml: (ruby 1.9) add a new file containing
+	    mapping table from Oracle characterset name to Ruby encoding
+	    name.
+
+2009-01-11  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/encoding.c: (ruby 1.9) add OCI8.encoding and
+	    OCI8.encoding= to get and set the encoding of the Oracle
+	    library.
+	* ext/oci8/oci8.h: (ruby 1.9) add macros OCI8StringValue
+	    and OCI8SafeStringValue which convert the string encoding
+	    to Oracle librarie's encoding.
+	* ext/oci8/oci8.c: OCI8.new raise a SecurityError when specified
+	    connect string is tainted and $SAFE >= 1.
+	* ext/oci8/stmt.c: OCI8#parse raise a SecurityError when specified
+	    SQL statemenet is tainted and $SAFE >= 1.
+	* ext/oci8/metadata.c: OCI8#describe_* raise a SecurityError
+	    when the object name to be described is tainted and $SAFE >= 1.
+	* ext/oci8/lob.c: OCI8::BFILE.new, OCI8::BFILE#dir_alias= and
+	    OCI8::BFILE#filename= raise a SecurityError when specified
+	    dir_alias or filename is tainted and $SAFE >= 1.
+	* ext/oci8/attr.c, ext/oci8/bind.c, ext/oci8/error.c,
+	  ext/oci8/object.c, ext/oci8/oci8lib.c, ext/oci8/ocinumber.c:
+	    (ruby 1.9) converts encoding from/to OCI.encoding.
+
+2009-01-11  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c: concatenate read data at the end, instead of
+	    appending them for each pieces when reading LOB data.
+	* test/test_oranumber.rb: fix for ruby 1.9.
+
+2009-01-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: delete OCI8.oracle_client_version implemented
+	    in C. add OCI8.oracle_client_vernum whose value is retrieved
+	    by OCIClientVersion() if Oracle 10.2 or upper.
+	* ext/oci8/oci8.h: add macro rb_define_singleton_method_nodoc,
+	    which prevents rdoc from gathering the specified method.
+	* lib/.document, lib/oci8/.document: add lib/oci8.rb and
+	    lib/oci8/oracle_version.rb to rdoc targets.
+	* lib/oci8.rb.in, lib/oci8/oracle_version.rb: add
+	    OCI8::OracleVersion OCI8.oracle_client_version.
+	* test/config.rb: change version checking code to use
+	    OCI8::OracleVersion.
+	* test/test_all.rb, test/test_oracle_version.rb: add test cases
+	    of OCI8::OracleVersion.
+
+2009-01-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/encoding.c, ext/oci8/error.c, ext/oci8/ocinumber.c,
+	  ext/oci8/oradate.c: use rb_usascii_str_new() or
+	    rb_usascii_str_new_cstr() when its encoding is always
+	    us-ascii.
+	* ext/oci8/extconf.rb: add type checking for rb_encoding
+	    for ruby 1.9.
+	* ext/oci8/oci8.h: use rb_str_new(), rb_str_new2() and
+	    rb_tainted_str_new() if rb_usascii_str_new(),
+	    rb_usascii_str_new_cstr() and rb_external_str_new_with_enc()
+	    are not usable.
+	* ext/oci8/oci8lib.c: use ORAVERNUM macro.
+
+2009-01-03  KUBO Takehiro  <kubo@jiubao.org>
+	* custom-rdoc.rb: fix for rdoc bundled with ruby 1.9.
+	* ext/oci8/apiwrap.yml, ext/oci8/oci8lib.c: set the value of
+	    OCI8.oracle_client_version by OCIClientVersion() if
+	    the binary is configured with --with-runtime-check and
+	    the Oracle client is 10.2 or upper.
+	* test/test_oranumber.rb: disable workaround code when
+	    the Oracle client is 10.2.0.4 or upper.
+
+2008-12-30  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/attr.c: rewrite code converting the rowid descriptor
+	    to string representation by using oci8_exec_sql().
+	* ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/stmt.c: add check code to ensure that the process id
+	    is not changed.
+
+2008-12-30  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: add code to check the cpu type of Mac OS X
+	    libclntsh.dylib.
+
+2008-12-21  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.yml: add OCINlsCharSetNameToId()
+	* ext/oci8/encoding.c: add OCI8#charset_name2id and
+	    OCI8#charset_id2name.
+	* ext/oci8/env.c: include <util.h> only when ruby 1.8.
+	* ext/oci8/oci8.h: don't include <rubyio.h> which is not used
+	    anywhere.
+	* ext/oci8/ocinumber.c: include <errno.h> to compile
+	    ruby-oci8 for ruby 1.9.
+	* lib/oci8/metadata.rb: comment duplicated typecode.
+	* test/test_all.rb: use AutoRunner when it is found.
+	    Ruby 1.9's test unit does't has AutoRunner.
+	* test/test_oranumber.rb: explicity convert actual_val, which is
+	    passed to before assert_in_delta(), to a Float to prevent
+	    SEGV in OCINumberSub().
+
+2008-12-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c: fix comment.
+	* test/test_rowid.rb: add one assertion as ruby-oci8 1.0 branch does.
+
+2008-09-10  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c: use session time zone when time zone
+	    is not specified to set bind objects of timestamp with time
+	    zone datatype.
+	* lib/oci8/datetime.rb: add OCI8::BindType::Util.default_timezone
+	    to get Time or DateTime objects from bind objects of date
+	    datatype.
+	* test/test_datetime.rb: fix test_datetype_duck_typing and add
+	    test_timezone for the above changes.
+
+2008-09-09  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.rb, ext/oci8/apiwrap.yml, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c, lib/oci8.rb.in, lib/oci8/datetime.rb,
+	  lib/oci8/metadata.rb, lib/oci8/oci8.rb, test/test_break.rb,
+	  test/test_datetime.rb, test/test_dbi.rb, test/test_metadata.rb:
+	    fix Oracle version number mistakes. rename ORAVER_9_1 to
+	    ORAVER_9_0.
+
+2008-08-31  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/stmt.c: disable DYNAMIC_FETCH to fetch
+	    LONG or LONG RAW columns. It doesn't work well.
+	* lib/oci8/metadata.rb: define char_size for Oracle 8i.
+	* lib/oci8/oci8.rb: define OCI8::BindType::Long and
+	    OCI8::BindType::LongRaw as subclasses of OCI8::BindType::String
+	    and OCI8::BindType::RAW respectively. fix
+	    OCI8::BindType::String.create and OCI8::BindType::RAW.create
+	    for strings longer than 4000.
+	* test/test_array_dml.rb: add workaround of "ORA-01036: illegal
+	    variable name/number" by renaming a bind variable name ":N"
+	    to ":1". I guess this is a problem in the Oracle library.
+	* test/test_break.rb, test/test_dbi.rb, test/test_metadata.rb:
+	    fix test codes for Oracle 8i or lower.
+	* test/test_oci8.rb: revise a test for LONG columns.
+
+2008-08-28  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.yml: OCINumberSign is unavailable on Oracle 8.
+	* lib/DBD/OCI8/OCI8.rb: A data dictionary all_constraints doesn't have
+	    index_name column on Oracle 8i or lower. Rewrite
+	    DBI::DBD::OCI8::Database#column by using all_cons_columns.
+	* lib/oci8/metadata.rb: raise an error when using 
+	* test/config.rb: Oracle 8 desn't have database_compatible_level data
+	    dictionary.
+	* test/test_metadata.rb: fix test codes for Oracle 8i or lower.
+
+2008-08-26  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/metadata.c: fix bugs when trying to use already freed
+	    OCI8::Metadata::*.
+	* ext/oci8/ocidatetime.c: fix OCI8::BindType::OCIDate#set().
+	* ext/oci8/ocinumber.c: undef OraNumber#round_prec and OraNumber
+	    #shift when using Oracle 8.0.
+	* lib/oci8/datetime.rb, lib/oci8/metadata.rb: fix bugs when using
+	    Oracle 8.0.
+	* test/config.rb, test/test_dbi.rb, test/test_metadata.rb,
+	  test/test_oci8.rb, test/test_oranumber.rb: do same with the
+	    previous commit.
+	* test/test_datetime.rb: disable some test cases when Oracle 8.1
+	    or lower.
+	* test/test_dbi_clob.rb: fix when testing in a deep directory.
+
+2008-08-26  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.h.tmpl, ext/oci8/apiwrap.rb
+	  ext/oci8/apiwrap.yml, ext/oci8/bind.c, ext/oci8/extconf.rb,
+	  ext/oci8/oci8.h, ext/oci8/ocidatetime.c, ext/oci8/xmldb.c,
+	  lib/oci8.rb.in, lib/oci8/datetime.rb, lib/oci8/metadata.rb,
+	  lib/oci8/oci8.rb: change oracle version number format.
+	    For example Oracle 9.1.0's version number was represented as 910
+	    in ruby-oci8. Now it is 0x09000000. This format is same with
+	    that of the last argument of OCIServerRelease().
+
+2008-08-10  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c: add workaround code for a losing character problem
+	    when reading CLOB. The problem is happened at the following condition.
+	    1. Oracle client version is 10.2.0.4 or 11.1.0.6.
+	       (It doesn't depend on Oracle server version.)
+	    2. The character set is a variable-length one (e.g. AL32UTF8).
+	* dist-files: add lib/oci8/datetime.rb and .document files.
+
+2008-08-09  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c: fix OCI8::LOB#size= when using a lob over 2GB.
+	    fix the return value of OCI8::LOB#write when writing a string
+	    over 2GB.
+
+2008-08-05  KUBO Takehiro  <kubo@jiubao.org>
+	* test/config.rb, test/test_all.rb, test/test_array_dml.rb,
+	  test/test_bind_raw.rb, test/test_bind_time.rb, test/test_break.rb,
+	  test/test_clob.rb, test/test_connstr.rb, test/test_datetime.rb,
+	  test/test_dbi.rb, test/test_dbi_clob.rb, test/test_metadata.rb,
+	  test/test_object.rb, test/test_oci8.rb, test/test_oradate.rb,
+	  test/test_oranumber.rb, test/test_rowid.rb:
+	    fix to run tests in directories outside of 'test' directory.
+
+2008-08-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/attr.c: If ORA-01000 (maximum open cursors exceeded) when
+	    converting a rowid descriptor to string representation, run
+	    GC to cleanup unreferenced statement handles and try again.
+	* ext/oci8/oci8.h, ext/oci8/oci8lib.c: add a utility function
+	    oci8_exec_sql() to execute a SQL statement in C.
+	* ext/oci8/encoding.c: use oci8_exec_sql() to run anonymous PL/SQL
+	    blocks in oci8_charset_id2name() and oci8_charset_name2id().
+	* ext/oci8/bind.c, ext/oci8/metadata.c, ext/oci8/ocidatetime.c,
+	  ext/oci8/ocinumber.c: suppress compiler warnings.
+	* ext/oci8/oci8.c: avoid "[BUG] object allocation during garbage
+	    collection phase" when using ruby 1.9. In GC, just free a
+	    session handle without rollback.
+
+2008-08-02  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/ocidatetime.c, lib/oci8.rb.in,
+	  lib/oci8/datetime.rb: change binding code for timestamps
+	    and intervals. C side is a thin wrapper which converts Oracle's
+	    date, timestamp and interval values to ruby arrays and vise
+	    versa. Ruby side converts the arrays to ruby's Time, DateTime,
+	    Integer (for interval year to month) and Rational (for interval
+	    day to second).
+	* lib/oci8/oci8.rb: change mapping for binding date, timestamp and
+	    timestamp with local time zone from OCI8::BindType::DateTime
+	    to OCI8::BindType::Time.
+	* test/test_array_dml.rb, test/test_datetime.rb, test/test_dbi.rb,
+	  test/test_oci8.rb: fix test cases for a change above.
+
+2008-07-17  KUBO Takehiro  <kubo@jiubao.org>
+	* Makefile: add a rdoc target to make rdoc document.
+	* custom-rdoc.rb: add a file which customizes rdoc to handle 
+	    oci8_define_class_under() and oci8_define_bind_class().
+	* ext/oci8/.document: add a new file for rdoc.
+	* ext/oci8/bind.c, ext/oci8/oci8.h: rename cOCIBind to cOCI8BindTypeBase,
+	    which is same name used in custom-rdoc.rb.
+	* ext/oci8/oci8.c, ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c:
+	    delete code in comment for vanilla rdoc which doesn't know what
+	    oci8_define_class_under() and oci8_define_bind_class() do.
+	* ext/oci8/oradate.c: fix rdoc comments.
+
+2008-07-13  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c: (1) add rdoc comments. (2) OCI8::Cursor#type
+	    returns a Fixnum when the type is not undocumented value instead
+	    of raising an exception.
+	* lib/.document, lib/oci8/.document: add new files for rdoc.
+	* lib/oci8/metadata.rb: fix OCI8::Metadata::Scheme#inspect.
+	* lib/oci8/object.rb: don't put OCI8::BindArgumentHelper, which is
+	    not used by users, to rdoc.
+	* lib/oci8/oci8.rb: (1) fix rdoc comments. (2) change the return
+	    value of OCI8#exec when the SQL statement is a PL/SQL block.
+	    (3) change the method of customize the bind type for NUMBER
+	    without precision and scale to same with ruby-oci8 1.0 as follows
+	      OCI8::BindType::Mapping[:number_unknown_prec] = ...
+	      OCI8::BindType::Mapping[:number_no_prec_setting] = ...
+
+2008-07-12  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: add OraNumber#to_json and OraDate#to_json.
+	* lib/oci8/metadata.rb: define char_used?, char_size, fsprecision
+	    and lfprecision methods to subclasses of OCI8::Metadata::Base
+	    onln when Oracie 9i or upper. They ara unavailable on Oracle
+	    8.1 or lower.
+
+2008-07-06  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h: add comments.
+
+2008-07-05  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb:
+	   1. prints more information on checking LD_LIBRARY_PATH.
+	   2. fix for windows Oracle 11g instant client.
+	   3. fix for intel mac instant client.
+	* ext/oci8/object.c, lib/oci8/object.rb, lib/oci8/oci8.rb:
+	   fix to pass an array of Oracle objects to a procedure.
+
+2008-04-27  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c, lib/oci8/oci8.rb: fix typo.
+	    (pointed by Liming)
+	* dist-files: fix added and deleted files.
+
+2008-04-08  KUBO Takehiro  <kubo@jiubao.org>
+	* metaconfig: add '-w' when running test cases.
+	* test/test_metadata.rb: suppress warning: "shadowing outer local variable - i."
+	* ext/oci8/stmt.c: suppress warning: "warning: instance variable
+	    @max_array_size not initialized" at lib/oci8/oci8.rb:375.
+
+2008-03-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/encoding.c, ext/oci8/extconf.rb, ext/oci8/oci8.h
+	  ext/oci8/oci8lib.c: add a new file encoding.c.
+	    oci8_charset_id2name() is added to convert Oracle charset
+	    id to charset name. If the Oracle client version is 9iR2
+	    or upper, it uses OCINlsCharSetIdToName(). If 9iR1 or lower,
+	    it uses PL/SQL function nls_charset_name() and converts
+	    at the server side.
+	* ext/oci8/metadata.c: use oci8_charset_id2name() instead of
+	    OCINlsCharSetIdToName().
+
+2008-03-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8lib.c, ext/oci8/oci8.h:
+	    When '--with-runtime-check' is passed to extconf.rb, oci8lib.so
+	    is no longer linked to an Oracle client library at compilation
+	    time. It tries to search the Oracle client library at runtime.
+	* ext/oci8/bind.c: define OCI8::BindType::BinaryDouble when
+	    oracle_client_version's value is 10g or later, not when SQLT_BDOUBLE
+	    is declared. This is for runtime check.
+
+2008-03-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/object.c, ext/oci8/oci8.h,
+	  ext/oci8/oci8lib.c, ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c,
+	  ext/oci8/oradate.c, ext/oci8/stmt.c: add qualifier 'const' to
+	    oci8_bind_*class_t values. These are read only.
+
+2008-03-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/.: add apiwrap.[ch] to svn:ignore property.
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.rb, ext/oci8/apiwrap.yml:
+	    add alternative code if OCINumberSetPi(), OCINumberIsInt() is
+	    not found.
+	* ext/oci8/oci8.h: delete unused macros. add LIKELY and UNLIKELY
+	    macros and use the former in oci8_get_errhp().
+	* ext/oci8/oci8.h, ext/oci8/oci8lib.c: change the scope of
+	    oci8_base_class to static.
+	* ext/oci8/ocinumber.c: fix OraNumber#** and OraNumber#<=>. raise
+	    exceptions when OraNumber#round_prec or OraNumber#shift is called
+	    and the Oracle client version is 8.0.
+	* test/test_oranumber.rb: add testcass for all OraNumber methods.
+
+2008-03-19  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c, lib/oci8/compat.rb, lib/oci8/object.rb
+	  lib/oci8/oci8.rb, test/test_oci8.rb:
+	    1. OCINumber, which is a new object in 2.0, become OraNumber.
+	       This means OraNumber become a true numeric class.
+	    2. Rdoc comments in ocinumber.c are fixed.
+
+2008-03-08  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8lib.c, ext/oci8/rowid.c:
+	    rowid.c is deleted. OCIRowid is no longer in use.
+	* ext/oci8/oci8.h, ext/oci8/attr.c: oci8_get_rowid_attr()
+	    is moved from rowid.c and returns a String instead of
+	    an OCIRowid object.
+	* ext/oci8/stmt.c: fix a rdoc comment of OCI8::Cursor#rowid.
+	* lib/oci8/oci8.rb: fetch a rowid value as a String.
+	* test/test_all.rb, test/test_rowid.rb: add a rowid testcase.
+
+2008-03-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.rb, ext/oci8/apiwrap.yml:
+	    add all OCI functions to 'apiwrap.yml'.
+	* ext/oci8/object.c: use OCIObjectPin_nb() instead of OCIObjectPin().
+	* ext/oci8/oci8lib.c: call OCIBreak in rb_thread_blocking_region()
+	    to prevent the thread from being blocked.
+
+2008-03-06  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.h.tmpl:
+	    rewrite apiwrap.[ch].tmpl. All non-static variables
+	    and functions have 'oci8_' prefix name.
+	* ext/oci8/apiwrap.rb, ext/oci8/apiwrap.yml,
+	  ext/oci8/extconf.rb: change format of apiwrap.yml
+	    to use both OCIAttrGet() and OCIAttrGet_nb().
+	* ext/oci8/oci8.c, test/config.rb: add OCI8.oracle_client_version.
+
+2008-03-05  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/env.c, ext/oci8/oci8.h: use native API to get a thread
+	    local errhp (ruby 1.9 only)
+	      pthread: pthread_getspecific()
+	      win32:   TlsGetValue()
+
+2008-03-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb: output a message to say 'install
+	    a ruby development package' when 'mkmf.rb' is not
+	    found and the platform is Linux. Both ruby and its
+	    development package are required to compile extension
+	    libraries on Linux.
+
+2008-03-04 KUBO Takehiro <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c: fix for ruby-1.9.0-1.
+	    The arguments of rb_num_coerce_cmp() and rb_num_coerce_bin()
+	    are changed in ruby-1.9.0-1.
+
+2008-2-27 Liming Lian <liming.lian@oracle.com>
+	Add new feature: Array DML
+	* lib/oci8/oci8.rb:  add three new methods for Array DML to OCI8::Cursor: 
+	    max_array_size=, bind_param_array and exec_array
+	    1) OCI8::Cursor#max_array_size=: set the maximum array size for OCI8::Cursor#bind_param_array. 
+	    This method should be called before OCI8::Cursor#bind_param_array
+	    2) OCI8::Cursor#bind_param_array: bind array explicitly. This method is used to bind an array of 
+	    values to a placeholder embedded in the prepared statement which is to be executed with 
+	    OCI8::Cursor#exec_array
+	    3) OCI8::Cursor#exec_array: executes the SQL statement assigned the cursor with array bindings. 
+	    This implementation currently only supports non-data returning statements (INSERT, UPDATE, DELETE 
+	    but not SELECT). All binding arrays should be the same size and this size will be used as iteration 
+	    count for OCIStmtExecute()
+	* ext/oci8/stmt.c: add support for Array DML
+	    1) Change the parameters for invoking OCIBindByPos and OCIBindByName because 
+	    currently we only support Array DML for non-PL/SQL binds.
+	    2) Add a new parameter "Value iteration_count" to function oci8_stmt_execute. 
+	    This parameter indicates iteration count for OCIStmtExecute. For Non-Array DML, 
+	    you should set this parameter "nil"
+	    3) Add three new functions: each_value, clear_binds_iterator_proc, oci8_stmt_clear_binds. 
+	    Those functions are used to clear all binds from OCI8::Cursor. When calling OCI8::Cursor#max_array_size, 
+	    all the binds will be clean from cursor if instance variable max_array_size of cursor is set before.
+	* test/test_array_dml.rb(added): add test cases for Array DML
+	* test/test_all.rb: call test cases for Array DML 
+
+2008-02-17  KUBO Takehiro  <kubo@jiubao.org>
+	* Makefile: add format_c_source target to fix indentation by
+	    astyle. <URL:http://astyle.sourceforge.net>
+	* ext/oci8/error.c, ext/oci8/lob.c, ext/oci8/metadata.c,
+	  ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c,
+	  ext/oci8/oradate.c, ext/oci8/stmt.c, ext/oci8/xmldb.c:
+	    fix indentation by astyle.
+	    The command line options are as follows.
+	      astyle --style=linux --indent=spaces=4 --brackets=linux ext/oci8/*.[ch]
+
+2008-02-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c, ext/oci8/stmt.c:
+	    change from:
+	      switch (fixnum_value) {
+	      case INT2FIX(INT_CONSTANT):
+	        ....;
+	    to:
+	      switch (FIX2INT(fixnum_value)) {
+	      case INT_CONSTANT:
+	        ....;
+	    "case INT2FIX(INT_CONSTANT)" confuses astyle.
+	    astyle's URL: http://astyle.sourceforge.net
+	* test/config.rb: sleep 5 seconds and retry again when
+	    ORA-12516 or ORA-12520. One second was too short on
+	    my new linux box.
+	* test/test_oci8.rb: fix a test case for x86_64 linux.
+
+2008-01-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb: add checking code for intern.h, util.h,
+	    ruby/util.h, ruby_errinfo and rb_errinfo.
+	* ext/oci8/env.c: define a header file to be included by
+	    HAVE_RUBY_UTIL_H and HAVE_UTIL_H, not by RUBY_VM.
+	* ext/oci8/oci8.h: define a header file to be included by
+	    HAVE_INTERN_H, not by RUBY_VM. use HAVE_RB_ERRINFO and
+	    HAVE_RUBY_ERRINFO to define rb_errinfo() as a macro.
+	* ext/oci8/oci8.c: use rb_eval_string() instead of rb_reg_new()
+	    for not to use RUBY_VM.
+
+2008-01-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h ext/oci8/oci8lib.c: rename variable name
+	    cOCIHandle to oci8_cOCIHandle to use outside of oci8lib.c.
+	* ext/oci8/metadata.c: use oci8_cOCIHandle instead of rb_cObject
+	    to hold a descrbe handle. check parent object's handle type
+	    in oci8_metadata_create().
+
+2008-01-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl: fix a bug on runtime-api check.
+	* ext/oci8/ocidatetime.c, test/test_datetime.rb: use
+	    DateTime.parse('0001-01-01 00:00:00.1') instead of 
+	    DateTime.parse('00:00:00.1'). The latter doesn't work
+	    on ruby 1.8.5 or earlier.
+	* test/config.rb: revert the previous commit and add
+	    get_oci8_connection() and get_dbi_connection() to the
+	    base class of test cases. When an attempt to connect fails
+	    by ORA-12516 or ORA-12520, their methods sleep one seconds
+	    and try again more once.
+	    delete unused method setup_lowapi().
+	* test/test_bind_raw.rb, test/test_bind_time.rb,
+	  test/test_break.rb, test/test_clob.rb, test/test_datetime.rb,
+	  test/test_dbi.rb, test/test_dbi_clob.rb, test/test_metadata.rb,
+	  test/test_object.rb, test/test_oci8.rb, test/test_oradate.rb,
+	  test_oranumber.rb: revert the previous commit and use
+	    get_oci8_connection() or get_dbi_connection() to make a
+	    connection.
+
+2008-01-08  KUBO Takehiro  <kubo@jiubao.org>
+	* test/config.rb, test/test_bind_raw.rb, test/test_bind_time.rb,
+	  test/test_break.rb, test/test_clob.rb, test/test_datetime.rb,
+	  test/test_dbi.rb, test/test_dbi_clob.rb, test/test_metadata.rb,
+	  test/test_object.rb, test/test_oci8.rb, test/test_oradate.rb,
+	  test_oranumber.rb: use one OCI8 session for all OCI8 test cases
+	    and use one DBI session for all DBI test cases.
+	    Before this changes, connection/disconnection were called
+	    for each tests. If they are done too frequently and the Oracle
+	    server is on a remote server, the following error is raised.
+	      OCIError: ORA-12516: TNS:listener could not find available
+	      handler with matching protocol stack
+
+2008-01-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/stmt.c: 1. add a 'pre_fetch_hook'
+	    callback function to oci8_bind_class_t. This function is
+	    called before OCIStmtFetch in OCI8::Cursor#fetch.
+	    2. allocate OCIStmt handle by pre_fetch_hook when a result set
+	    has cursors.
+	    3. change 'init' callback function's prototype in
+	    oci8_bind_class_t.
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/object.c,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c,
+	  ext/oci8/oradate.c, ext/oci8/rowid.c: changes causes by above 1
+	    and 3.
+	* test/test_oci8.rb: delete re-defining in a test case for cursors
+	    in a result set.
+
+2008-01-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c: fix a SEGV bug when an error is raised in GC.
+	    make a custom backtrace entry only when 'caller' returns an Array.
+
+2007-12-29  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/metadata.rb, lib/oci8/oci8.rb: support cursors in a
+	    result set. For example:
+	      SELECT column1 A, column2 B, CURSOR(SELECT * FROM table2) C
+	        FROM table1
+	    (port from changes in 1.0.0, which is contributed by Randy Gordon)
+	* test/test_oci8.rb: add a testcase for cursors in a result set.
+
+2007-12-23  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: fix for official x86_64 rpms.
+	    (contributed by Pat.)
+
+2007-12-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c, lib/oci8/oci8.rb: delete a private method
+	    OCI8::Curosr#__connection and use @con instead.
+
+2007-12-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb: compile xmldb.o by default.
+	* ext/oci8/lob.c, ext/oci8/metadata.c, ext/oci8/oci8.c: use
+	    functions which ends with _nb instead of normal OCI functions
+	    if they may block ruby itself. delete BUILD_FOR_ORACLE_* macros
+	    and use have_OCI* instead.
+	* ext/oci8/oci8.h: delete unused macros; BUILD_FOR_ORACLE_*,
+	    Get_Int_With_Default, oci_rc2, oci_rc, and _D_.
+	* ext/oci8/oci8lib.c, ext/oci8/oci8.c: change the default value
+	    of executing_thread member in oci8_svcctx_t.
+	* ext/oci8/xmldb.c: disabled for a while.
+
+2007-12-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.h.tmpl, ext/oci8/apiwrap.rb:
+	    change function declares of runtime-check.
+	    add oracle_client_version.
+	* ext/oci8/apiwrap.yml: add OCI function prototypes.
+	* ext/oci8/extconf.rb: check oracle_client_version by existent functions
+	    in OCI libraries. delete BUILD_FOR_ORACLE_VERSION_MAJOR and
+	    BUILD_FOR_ORACLE_VERSION_MINOR macros. add ORACLE_CLIENT_VERSION.
+	* ext/oci8/oci8.h: use ORACLE_CLIENT_VERSION instead of
+	    BUILD_FOR_ORACLE_VERSION_MAJOR and BUILD_FOR_ORACLE_VERSION_MINOR
+	    macros.
+	* ext/oci8/ocidatetime.c: fix for ruby 1.8.
+	* ext/oci8/tdo.c: delete an unused file.
+
+2007-12-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl: move rboci_blocking_region() and
+	    find_symbol() to ext/oci8/oci8lib.c and rename to
+	    oci8_blocking_region() and oci8_find_symbol() respectively.
+	* ext/oci8/bind.c: use RFLOAT_VALUE macro for ruby 1.9.
+	* ext/oci8/oci8.h: define a macro RFLOAT_VALUE if it is not defined.
+	    add prototypes oci8_blocking_region() and oci8_find_symbol().
+	* ext/oci8/oci8lib.c: add oci8_blocking_region() and oci8_find_symbol().
+	* ext/oci8/ocidatetime.c: add workaround code for ruby 1.9 VM bug.
+	* lib/DBD/OCI8/OCI8.rb, lib/oci8/metadata.rb, test/test_metadata.rb:
+	    rename OCI8::Metadata::Column#is_null? to
+	    OCI8::Metadata::Column#nullable? as ruby 1.0.0 does.
+	* test/test_dbi.rb: add testcase to check binding ''(empty string)
+	    via dbi as ruby 1.0.0 does.
+	* test/test_oci8.rb: add asserts binding Nan, +Infinity and
+	    -Inifinty as ruby 1.0.0 does.
+
+2007-11-23  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/apiwrap.c.tmpl, ext/oci8/apiwrap.h.tmpl, ext/oci8/apiwrap.rb
+	  ext/oci8/apiwrap.yml, ext/oci8/extconf.rb, ext/oci8/oci8.h
+	  ext/oci8/oci8lib.c: add a framework to check whether an OCI functions
+	    exists at run-time.
+	* ext/oci8/lob.c: check whether OCILobIsTemporary and OCILobLocatorAssign
+	    exist at run-time.
+	* ext/oci8/rowid.c: use new framework to check whether OCIRowidToChar
+	    exists at run-time.
+
+2007-11-20  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, , ext/oci8/apiwrap.c.tmpl,
+	  ext/oci8/apiwrap.h.tmpl, ext/oci8/apiwrap.rb,
+	  ext/oci8/apiwrap.yml: add new files for non-blocking
+	    executions. These use rb_thread_blocking_region in
+	    ruby 1.9.
+	* ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/stmt.c:
+	    use new non-blocking execution API for OCI8#exec and
+	    OCI8::CUrsor#fetch.
+	* test/test_break.rb: add comment and add sleep to pass
+	    test_blocking_mode.
+
+2007-11-19  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c, test/test_datetime.rb: fix for a change
+	   of DateTime#fsec_fractions in ruby 1.9.
+	* ext/oci8/stmt.c: rename OCI8::Cursor#__defineByPos to
+	   OCI8::Cursor#__define.
+	* test/test_oci8.rb: add test_select_number.
+	* lib/oci8/oci8.rb: add OCI8::BindType::Base.create which acts as
+	   a factory method. move bindtype specific code to create method
+	   of OCI8::BindType::Base's subclasses.
+
+2007-11-18  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/DBD/OCI8/OCI8.rb: add StatementHandle#column_info.
+	   refine DatabaseHandle#columns.
+	* test/test_dbi.rb: add a testcase for StatementHandle#column_info
+	   and DatabaseHandle#columns.
+
+2007-11-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c: add OCIError#initialize(msg, code = nil).
+	* ext/oci8/metadata.c, lib/oci8/metadata.rb: rename char_semantics
+	   method to "char_used?". change the return value of data_type
+	   method when the data_type is NCHAR, NVARCHAR2 or NCLOB.
+	* test/test_all.rb, test/test_metadata.rb: add a testcase for
+	   OCI8::Cursor#column_metadata and OCI8#describe_table.
+
+2007-11-17  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: OCI8::Cursor#fetch_hash accepts a block now.
+	* test/test_oci8.rb: add a test for fetch_hash with a block.
+	* ext/oci8/metadata.c: fix for 64-bit windows.
+
+2007-11-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c, lib/oci8/oci8.rb: add OCI8::Cursor#column_metadata.
+	* ext/oci8/metadata.c, ext/oci8/oci8.h, ext/oci8/stmt.c: Change
+	   the lifetime of OCI8::Metadata::Base. It depended on the connection,
+	   but now it depends on what it describes. For example OCI8::cursor
+	   for OCI8::Cursor#column_metadata.
+	* ext/oci8/env.c, ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	   ext/oci8/oraconf.rb, setup.rb: fix for ruby 1.9. Not full tests are
+	   not passed on ruby 1.9.
+
+2007-11-11  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c, lib/oci8/metadata.rb, test/test_datetime.rb:
+	   suppress warnings 'instance variable @xxxx not initialized' when
+	   running ruby with '-w' option. (suggested by Daniel Berger.)
+
+2007-11-11  KUBO Takehiro  <kubo@jiubao.org>
+	* test/config.rb, test/test_dbi.rb, test/test_oci8.rb:
+	   add 'purge' option to 'drop table' statement when Oracle 10g
+	   or upper.
+	* ext/oci8/bind.c: add OCI8::BindType::BinaryDouble when SQLT_BDOUBLE
+	   is defined.
+	* lib/oci8/compat.rb: add OCI8::SQLT_IBFLOAT, OCI8::SQLT_IBDOUBLE and
+	   OCI8::SQLT_BFILE for compatibility with 1.0.
+	* lib/oci8/metadata.rb, lib/oci8/object.rb, lib/oci8/oci8.rb:
+	   rename :bfloat and :bdouble to :binary_float and :binary_double
+	   respectively.
+	* lib/oci8/oci8.rb: use OCI8::BindType::BinaryDouble for :binary_float
+	   and :binary_double column when BinaryDouble is available.
+	* test/test_oci8.rb: bind as binary_double explicitly in
+	   test_binary_float.
+
+2007-10-15  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/object.rb: quick fix to get and set object
+	   attributes without explicitly setting default_connection.
+	   I am now wavering about what to do.
+
+2007-10-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: fix a problem to compile with a
+	   third-party x86_64 rpm package. '--with-instant-client'
+	   option become obsolete and is ignored.
+	* ext/oci8/oraconf.rb: fix for FreeBSD oracle8-client port.
+	   Not all tests are passed on FreeBSD yet.
+	* lib/oci8/object.rb: fix a problem when convertion ruby class
+	   name to oracle object name fails.
+
+2007-10-11  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/DBD/OCI8/OCI8.rb: add DatabaseHandle#columns for DBI.
+	    (suggested by Venkat Pa)
+
+2007-10-11  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/DBD/OCI8/OCI8.rb: fix external OS authentication.
+	    I applied Dan Fitch's patch to improper location.
+
+2007-07-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c, lib/oci8/object.rb: support binary_double,
+	   binary_float and object member of object datatype.
+	* test/setup_test_object.sql, test/test_object.rb: add testcase for
+	   binary_double, binary_float, embedded object, array of raw, array
+	   of binary_double, array of binary_float, array of object in object
+	   datatype.
+
+2007-07-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c: support array of number in OCI8::NamedCollection.
+	* test/setup_test_object.sql, test/test_object.rb: fix a testcase
+	    to test array of number.
+
+2007-07-05  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/object.rb, ext/oci8/object.c: add OCI8::NamedCollection
+	    to support collection datatypes. add OCI8::NamedType#attributes
+	    and #attributes= instead of OCI8::NamedType#copy_attributes_from
+	    and #copy_attributes_to. and others.
+	* lib/oci8/oci8.rb: add OCI8#username.
+	* test/test_object.rb: add a testcase for array of varchar2.
+
+2007-07-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/object.c, lib/oci8/object.rb, lib/oci8/oci8.rb:
+	   delete OCI8::NamedType module and OCI8::NamedType::Base class
+	   and add OCI8::Object module, OCI8::Object::Base class and 
+	   OCI8::NamedType class. In the user view, OCI8::NamedType::Base
+	   become OCI8::Object::Base. The reason is that 'named type' is used
+	   only by OCI documents, and Other Oracle manuals use Oracle Object.
+	* ext/oci8/oci8.c: free all dependent objects in advance to
+	   disconnecting a connection. 
+	* lib/oci8/metadata.rb: add OCI8::Metadata::Type#type_metadata.
+	    fix typos.
+	* test/setup_test_object.sql, test/test_object.rb: add a testcase for
+	    Oracle Objects.
+
+2007-07-03  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/DBD/OCI8/OCI8.rb: fix for external OS authentication.
+	    (contributed by Dan Fitch)
+
+2007-06-26  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: add external OS authentication. (suggested by Dan Fitch)
+	      conn = OCI8.new('/')
+	    or
+	      conn = OCI8.new(nil, nil)
+	* test/test_connstr.rb: fix a testcase for external OS authentication.
+
+2007-06-23  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: read a shared library's ELF header to
+	    check what cpu is it for. (linux x86, x86_64 and ia64 only)
+
+2007-06-05  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: copy oraconf.rb of ruby-oci8-1.0 branch.
+	* ext/oci8/lob.c, ext/oci8/oci8.h, ext/oci8/stmt.c: fix to bind
+	    an OCI8::NCLOB value on Oralce 9i.
+	* test/test_oci8.rb: add testcases for binary_double datatype
+	    and OCI8::NCLOB.new.
+
+2007-05-20  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/object.rb, ext/oci8/object.c: add new files.
+	* ext/oci8/bind.c: fix to bind object type.
+	* ext/oci8/extconf.rb: use object.c instead of tdo.c.
+	* ext/oci8/metadata.c: add OCI8::Metadata::Base#tdo_id.
+	* ext/oci8/oci8.h: add new prototypes; oci8_set_ocinumber(),
+	    oci8_set_integer() and Init_oci_object(). delete Init_oci_tdo().
+	* ext/oci8/oci8lib.c: use Init_oci_object() instead of Init_oci_tdo().
+	* ext/oci8/ocinumber.c: export oci8_set_ocinumber() and
+	    oci8_set_integer().
+	* ext/oci8/stmt.c: fix to bind object type.
+	* lib/oci8.rb.in: add requiring 'oci8/object.rb'.
+	* lib/oci8/metadata.rb: add OCI8::Metadata::TypeMethod#has_result?
+	    fix comments.
+	* lib/oci8/oci8.rb: fix to bind object type.
+
+2007-05-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c, ext/oci8/oradate.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/tdo.c:
+	    change a callback function's argument type used internally
+	    in OCI8::BindType::Base#set().
+	* ext/oci8/metadata.c, lib/oci8/metadata.rb: change the internal
+	    structure of OCI8::Metadata::Base.
+
+2007-05-10  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: 1. move the location of setting
+	   OCI8::BindType::Mapping to the end of the file.
+	   2. set :xmltype to OCI8::BindType::Mapping's key when
+	   the fetched column is XMLTYPE.
+
+2007-05-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb: add '--with-oracle-version' option to
+	    make a binary for the specified oracle version.
+	    get the oracle client version from available OCI functions.
+	* ext/oci8/lob.c, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/rowid.c, ext/oci8/tdo.c, ext/oci8/xmldb.c: use
+	    BUILD_FOR_ORACLE_major_minor macros instead of HAVE_xxx
+	    macros.
+	* ext/oci8/oci8.c: delete unsed code.
+	* dist-files: add ext/oci8/xmldb.c and test/test_connstr.rb.
+
+2007-05-01  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c: fix to return nil for LONG null column.
+	* ext/oci8/env.c: use OCIInitialize() and OCIEnvInit() instead
+	   of OCIEnvCreate() on every Oracle version.
+	* ext/oci8/env.c, ext/oci8/error.c, ext/oci8/oci8.h: raise
+	   "OCI Library Initialization Error" when Oracle can't supply
+	   the error message.
+	* ext/oci8/oci8.c: raise OCIException instead of TypeError.
+	* lib/oci8/metadata.rb: fix typo in comment.
+	* VERSION: change to 2.0-svn.
+
+2007-04-30  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	  ext/oci8/tdo.c: enable XML support when Oracle 10g.
+	* ext/oci8/xmldb.c: add oci8_make_rexml() to support XML for reading.
+	* ext/oci8/lob.c: fix compiler warnings.
+	* ext/oci8/error.c: fix a bit.
+
+2007-04-28  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: fetch NCLOB column value as an OCI8::NCLOB. fetch
+	    BINARY_DOUBLE and BINARY_FLOAT column as a Float.
+	* lib/oci8/metadata.rb: OCI8::Metadata::Column#data_type can return
+	    :nclob, :bfloat and :bdouble now.
+	* ext/oci8/extconf.rb: check whether OCILobCreateTemporary exists.
+	* ext/oci8/lob.c: add OCI8::NCLOB.
+	* ext/oci8/oci8.h: add oci8_make_nclob().
+	* ext/oci8/tdo.c: use oci8_make_nclob().
+
+2007-04-26  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8/oci8.rb: fetch BFILE as OCI8::BFILE.
+	* ext/oci8/lob.c: add OCI8::BFILE.
+	* ext/oci8/oci8.h: add oci8_make_bfile().
+	* ext/oci8/tdo.c: use oci8_make_bfile().
+	* ext/oci8/stmt.c: use oci8_get_error_code().
+
+2007-04-21  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/error.c: change a way to set the error line number to the
+	    OCIException's backtrace.
+
+2007-02-15  KUBO Takehiro  <kubo@jiubao.org>
+	no new features. fix to suppress warnings and to compile with ruby 1.9.
+	* ext/oci8/attr.c, ext/oci8/lob.c, ext/oci8/metadata.c, ext/oci8/oci8.c,
+	  ext/oci8/oci8.h, ext/oci8/oci8lib.c, ext/oci8/rowid.c, ext/oci8/stmt.c,
+	  ext/oci8/tdo.c: use union to suppress warnings: dereferencing type-punned
+	    pointer will break strict-aliasing rules.
+	* ext/oci8/bind.c: change a format string tu suppress a warning.
+	* ext/oci8/error.c: use rb_errinfo() instead of ruby_errinfo to compile with ruby 1.9.
+	* ext/oci8/oci8.h: define rb_errinfo() as ruby_errinfo when compling with ruby 1.8.
+	* ext/oci8/oci8lib.c: delete unused macros OCI_DEFAULT and OCI_COMMIT_ON_SUCCESS.
+	* ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c: fix bugs.
+	* ext/oci8/oraconf.rb: use File.exist? instead of File.exists?. The latter become obsolete on ruby 1.9.
+	* lib/oci8/compat.rb: fix for ruby 1.9. Class.constants returns an array of Symbols in 1.9.
+
+2007-02-14  Oracle Corporation (modified for 2.0 by KUBO Takehiro <kubo@jiubao.org>)
+	* ext/oci8/oci8.c: add a private method parse_connect_string to support
+	    "username/password[@(tns_name|//host[:port]/service_name)][ as (sysdba|sysoper)]".
+	    (The original code, contributed by Oracle, is written
+	     for ruby-oci8 1.0. Kubo rewrite it for 2.0.)
+	* test/test_connstr.rb: add test cases for parse_connect_string.
+	* test/test_all.rb: call test cases for parse_connect_string.
+
+2007-02-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocinumber.c: fix a bug created by the previous commit.
+
+2007-01-28  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h: add TO_ORATEXT, TO_CHARPTR and RSTRING_ORATEXT
+	    macros to suppress 'differ in signedness' warinings.
+	* ext/oci8/attr.c, ext/oci8/error.c, ext/oci8/metadata.c,
+	  ext/oci8/oci8.c, ext/oci8/ocinumber.c, ext/oci8/rowid.c,
+	  ext/oci8/stmt.c, ext/oci8/tdo.c: use TO_ORATEXT, TO_CHARPTR and
+	    RSTRING_ORATEXT macros to suppress 'differ in signedness'
+	    warinings.
+
+2007-01-08  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb, ext/oci8/extconf.rb: refactor oraconf.rb.
+	    check whether Full Client or Instant Client by checking load
+	    library path.
+
+2006-12-27  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: ignore an exception during GC.
+
+2006-12-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/oci8lib.c: add new structure
+	    members to oci8_base_t to handle parent-children tree.
+	    add new functions oci8_link_to_parent() and
+	    oci8_unlink_from_parent().
+	    In prior to free the object's content. free all its children.
+	* ext/oci8/bind.c, ext/oci8/stmt.c:
+	    use oci8_base_t's structure members instead of oci8_bind_t 
+	    and oci8_stmt_t's members.
+	* ext/oci8/lob.c, ext/oci8/metadata.c, ext/oci8/tdo.c:
+	    link to the connection which creates the LOB, Metadata, TDO objects.
+	    These objects are freed when the connection is disconnected.
+	* ext/oci8/oci8.c: call logoff explicitly when the connection object
+	    is freed.
+
+2006-12-19  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/tdo.c: fix a GC problem.
+	* ext/oci8/stmt.c: add OCI8::Cursor#prefetch_rows=
+	* ext/oci8/oci8.c: add OCI8#prefetch_rows=. add comments for rdoc.
+	* doc/oci8-ja.rb: add comments for rdoc.
+
+2006-12-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c ext/oci8/ocinumber.c, ext/oci8/oradate.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/tdo.c: add PL/SQL
+	    table support. unify the variable names of oci8_bind_t.
+	* lib/oci8/oci8.rb: add PL/SQL table support.
+
+2006-12-13  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h, ext/oci8/stmt.c:
+	    delete oci8_bind_handle_t and use oci8_hp_obj_t.
+	    (prepare to bind an array)
+	* ext/oci8/bind.c: fix for alignment.
+	    (prepare to bind an array)
+
+2006-12-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c, ext/oci8/oradate.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/tdo.c, lib/oci8/oci8.rb:
+	    change arguments of internal bind-init functions.
+	    (refactoring)
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c, ext/oci8/oradate.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/tdo.c:
+	    split bind-init callback to init and init_elem.
+	    (prepare to bind an array)
+	* ext/oci8/bind.c, ext/oci8/oci8.h, ext/oci8/stmt.c:
+	    change arguments of piece-width-fetch callbacks.
+	    (prepare to bind an array)
+
+2006-12-07  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/oci8.h, ext/oci8/stmt.c, ext/oci8/tdo.c:
+	   delete rlen and use_rlen from oci8_bind_t.
+	* ext/oci8/rowid.c: change the bind type for ROWID not to use rlen.
+
+2006-12-05  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/attr.c, ext/oci8/bind.c, ext/oci8/error.c, ext/oci8/lob.c,
+	  ext/oci8/metadata.c, ext/oci8/oci8.c, ext/oci8/oci8.h,
+	  ext/oci8/ocidatetime.c, ext/oci8/ocinumber.c, ext/oci8/oradate.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/tdo.c:
+	    use RSTRING_LEN, RSTRING_PTR, RARRAY_LEN and RARRAY_PTR macros.
+
+2006-11-25  KUBO Takehiro  <kubo@jiubao.org>
+	* doc/oci8-ja.rb: add a new file for Japanese rdoc document.
+	* ext/oci8/ocidatetime.c: add comments for rdoc.
+	* test/test_datetime.rb: add testcases for OCI8::BindType::DateTime.
+
+2006-11-23  KUBO Takehiro  <kubo@jiubao.org>
+	* dist-files, ext/oci8/extconf.rb, ext/oci8/oci8.h, ext/oci8/oci8lib.c,
+	    ext/oci8/oranumber.c: delete OraNumber implemented by C.
+	* ext/oci8/metadata.c: use oci8_make_integer() instead of ora_number_to_str()
+	    which was implemented in oranumber.c.
+	* ext/oci8/ocinumber.c: add OCINumber#initialize_copy for OCINumber#copy.
+	* lib/oci8.rb.in: delete "require 'oci8/interval.rb'".
+	* lib/oci8/oci8.rb: remove OraNumber-related code.
+	* lib/oci8/compat.rb: add emulation code of OraNumber by using OCINumber.
+	* test_oranumber.rb: use assert_in_delta when comparing Float value.
+
+2006-11-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c: bind types for interval_ym and interval_ds
+	    are now Rational instread of OCI8::IntervalYM and OCI8::IntervalDS.
+	* lib/oci8/interval.rb: delete OCI8::IntervalYM and OCI8::IntervalDS.
+	* lib/oci8/oci8.rb: delete OCI8::IntervalYM and OCI8::IntervalDS.
+	* test/test_all.rb: call testcases for timestamps and intervals.
+	* test/test_datetime.rb: add testcases for timestamps and intervals.
+
+2006-11-19  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c: fix the default value of OCI8#long_read_len.
+	* ext/oci8/stmt.c: fix bug when execute RENAME statement.
+	* test/test_oci8.rb: add testcases for above two problems.
+	    The testcases are contributed by Pete Schwamb.
+
+2006-11-18  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/tdo.c: add a new class OCI8::TDO to fetch Oracle's
+	    object types.
+	* ext/oci8/bind.c, ext/oci8/extconf.rb, ext/oci8/lob.c,
+	    ext/oci8/oci8.h, ext/oci8/oci8lib.c, ext/oci8/stmt.c,
+	    lib/oci8/oci8.rb: use OCI8::TDO to fetch Oracle's object
+	    types.
+	* ext/oci8/lob.c: add oci8_make_clob() and oci8_make_blob()
+	    for OCI8::TDO.
+	* ext/oci8/metadata.c: export cOCI8MetadataBase for OCI8::TDO.
+	* ext/oci8/error.c: prepend error line in C to the exception's
+	    backtrace for debug.
+
+2006-11-18  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: add check code whether oci.h exists.
+
+2006-11-09  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/ocinumber.c: rename make_oci_number()
+	    and make_integer to oci8_make_ocinumber() and oci8_make_integer().
+	    add oci8_make_float().
+	* ext/oci8/oci8.h, ext/oci8/ocidatetime.c, lib/oci8/oci8.rb: add
+	    oci8_make_datetime_from_ocidate(), oci8_make_datetime_from_ocidatetime(),
+	    oci8_make_interval_ym() and oci8_make_interval_ds().
+	    OCI8::BindType::IntervalYM#get return an OCI8::IntervalYM instead of an array.
+	    OCI8::BindType::IntervalDS#get return an OCI8::IntervalDS instead of an array.
+	    OCI8::BindType::DateTime#get return a DateTime instead of an array.
+
+2006-11-04  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h: add callbacks for piecewise operations.
+	* ext/oci8/oraconf.rb: add an error message for intel mac.
+	* ext/oci8/bind.c: add OCI8::BindType::Long and
+	    OCI8::BindType::LongRaw.
+	* ext/oci8/stmt.c: fix OCI8::Cursor#define, OCI8::Cursor#bind_param,
+	    OCI8::Cursor#exec and OCI8::Cursor#fetch for piecewise operations.
+	* ext/oci8/lob.c, ext/oci8/oradate.c, ext/oci8/ocinumber.c,
+	  ext/oci8/rowid.c, ext/oci8/ocidatetime.c, ext/oci8/oranumber.c:
+	    follow up the change of piecewise operations.
+	* lib/oci8/oci8.rb: use OCI8::BindType::Long and
+	    OCI8::BindType::LongRaw for LONG and LONG RAW respectively.
+
+2006-08-18  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oradate.c: add OraDate.hash().
+	* ext/oci8/oranumber.c: OraNumber.new() now accepts a String.
+	* lib/oci8/oci8.rb: add YAML support for OraDate and OraNumber.
+	* test/test_oranumber.rb: add testcases for OraNumber.new(aString).
+
+2006-08-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c:
+	    Use long instead of int to bind Fixnum.
+	* lib/oci8.rb.in: add a workaround code on cygwin version.
+	    Cygwin manages environment variables by itself. They don't
+	    synchroize with Win32's ones. set some Oracle's environment
+	    variables to win32.
+
+2006-08-03  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8.rb.in: add a workaround code on cygwin version.
+	    Cygwin manages environment variables by itself. They don't
+	    synchroize with Win32's ones. set some Oracle's environment
+	    variables to win32.
+
+2006-07-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oradate.c: add OraDate#dup, OraDate#clone, OraDate#_dump
+	    and OraDate._load.
+	* ext/oci8/oranumber.c: add OraNumber#dup, OraNumber#clone,
+	    OraNumber#_dump and OraNumber._load.
+	* ext/oci8/rowid.c: add OCIRowid#dup, OCIRowid#clone.
+	    These methods raise an error when using Oracle 8.x.
+	* test/test_oradate.rb: add tests for OraDate#dup, OraDate#clone,
+	    OraDate#_dump and OraDate._load.
+	* test/test_oranumber.rb: add tests for OraNumber#dup,
+	    OraNumber#clone, OraNumber#_dump and OraNumber._load.
+
+2006-07-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/metadata.c, lib/oci8/metadata.rb: add a type_metadata method
+	    to OCI8::Metadata::Table, OCI8::Metadata::View, OCI8::Metadata::TypeAttr,
+	    OCI8::Metadata::Collection, OCI8::Metadata::Column, OCI8::Metadata::Argument
+	    OCI8::Metadata::TypeArgument and OCI8::Metadata::TypeResult.
+
+2006-07-21  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/bind.c, ext/oci8/stmt.c,
+	    lib/oci8/oci8.rb: Support LONG and LONG RAW longer than 65535 bytes.
+	    Add OCI8#long_read_len and OCI8#long_read_len= to set max long
+	    length.
+	* ext/oci8/oraconf.rb: fix typo.
+
+2006-07-20  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/rowid.c, ext/oci8/oci8lib.c: change
+	    Rowid's internal structure when OCIRowidToChar is available.
+	    The new structure can be passed to Marshal.
+	* VERSION, Makefile, ext/oci8/extconf.rb: 
+	    read version string from the VERSION file.
+
+2006-06-27  KUBO Takehiro  <kubo@jiubao.org>
+	Many method move to C layer. Add support of Timestamp, Interval
+	year to month and Interval day to second. Oracle's Date become
+	DateTime instead of OraDate.
+	* ext/oci8/env.c: 1. delete code registering ruby_xmalloc(),
+	    ruby_xrealloc() and ruby_xfree() to OCI library. These
+	    API cannot be called only in ruby VM's native thread.
+	    2. add workaround code to avoid breaking ENV.
+	* ext/oci8/oci8.c: move OCI8#parse from ruby to C layer.
+	* ext/oci8/oci8.h, ext/oci8/oci8lib.c: add oci8_id_* variables.
+	* ext/oci8/ocidatetime.c: delete OCIDateTime and OCIInterval.
+	    add OCI8::BindType::DateTime, OCI8::BindType::IntervalYM and
+	    OCI8::BindType::IntervalDS.
+	* ext/oci8/ocinumber.c: delete OCI8::Math::E, OCINumber#trunc
+	    and OCINumber#sign. add OCINumber#truncate and
+	    OCI8::BindType::Integer.
+	* ext/oci8/oraconf.rb:fix for OracleXE windows version. OracleXE's
+	    registry path is \\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\KEY_XE.
+	* ext/oci8/oranumber.c: move OCI8::BindType::Integer to ocinumber.c
+	* ext/oci8/stmt.c: OCI8::Cursor#initialize become private.
+	    move OCI8::Cursor#fetch, OCI8::Cursor#[], OCI8::Cursor#[]=,
+	    OCI8::Cursor#keys from ruby to C layer. add a private method
+	    OCI8::Cursor#__defined?
+	* lib/oci8/oci8.rb: many methods move to C layer.
+	* lib/oci8/interval.rb: add OCI8::IntervalYM an OCI8::IntervalDS.
+	* lib/ocidatetime.rb: deleted.
+	* test/test_dbi.rb: fix test script which retrieving Date.
+	* test/test_oci8.rb: fix test script which retrieving Date.
+
+2006-03-05  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: add check_ruby_header to warn when
+	    broken darwin ruby.
+	    add export #{ld_path} in check_instant_client().
+
+2006-02-25  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/metadata.c: set default value zero in C of private method
+	    OCI::Metadata::Base#__get_*. add a private method 
+	    OCI::Metadata::Base#__charset_name.
+	* lib/DBD/OCI8/OCI8.rb: fix to work with ruby-oci8 0.1 also.
+	* lib/oci8/metadata.rb: refactor and add comments for rdoc.
+
+2006-02-11  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8.rb.in: require oci8/compat.rb also.
+	* lib/oci8/compat.rb: add a new file. Old version's features
+	    are moved from lib/oci8/oci8.rb.
+	* lib/oci8/metadata.rb: data_type's return value become symbol
+	    instead of number.
+	* lib/oci8/oci8.rb: Old version's features are moved to
+	     lib/oci8/compat.rb.
+
+2006-02-09  KUBO Takehiro  <kubo@jiubao.org>
+	add OCI8::Metadata module.
+	* ext/oci8/error.c: add oci8_get_error_code().
+	* ext/oci8/extconf.rb: delete param.o and add metadata.o.
+	* ext/oci8/metadata.c: add a new file.
+	* ext/oci8/oci8.h: add oci8_get_error_code(), Init_oci8_metadata(),
+	    oci8_metadata_create() and ora_number_to_str().
+	    delete  and oci8_param_create().
+	* ext/oci8/oci8lib.c: call Init_oci8_metadata() instead of
+	     Init_oci8_param().
+	* ext/oci8/oranumber.c: export ora_number_to_str().
+	* ext/oci8/param.c: deleted.
+	* ext/oci8/stmt.c: call oci8_metadata_create instead of 
+	     oci8_param_create().
+	* lib/oci8.rb.in: require 'oci8/metadata.rb'
+	* lib/oci8/metadata.rb: add a new file.
+
+2006-02-08  KUBO Takehiro  <kubo@jiubao.org>
+	* lib/oci8.rb: move almost code to lib/oci8/oci8.rb.
+	* lib/oci8/oci8.rb: moved from lib/oci8.rb.
+
+2006-02-04  KUBO Takehiro  <kubo@jiubao.org>
+	merge OCIStmt to OCi8::Curosr.
+	* ext/oci8/oci8.c: implement OCI8::autocommit? and OCI8::autocommit=
+	    in C layer.
+	* ext/oci8/oci8.h: fix oci8_svcctx_t structure to support
+	    OCI8::autocommit in C layer. fix Init_oci8_stmt() prototype.
+	* ext/oci8/oci8lib.c: fix Init_oci8_stmt().
+	* ext/oci8/stmt.c: OCIStmt become OCI8::Cursor. Almost OCIStmt's
+	    methods become private methods, which are called by ruby layer.
+	* lib/oci8.rb.in: delete OCI8::autocommit?, OCI8::autocommit=,
+
+2006-02-02  KUBO Takehiro  <kubo@jiubao.org>
+	move non-blocking handling code from oci8.rb to oci8lib.so.
+	* ext/oci8/error.c: add OCIBreak class.
+	* ext/oci8/oci8.c: move oci8_svcctx_t to oci8.h.
+	    change oci8_commit(), oci8_rollback(), oci8_non_blocking_p()
+	    and oci8_set_non_blocking() to use oci_rc macro.
+	    change oci8_break() for oci_rc macro.
+	    delete oci8_reset(). OCIReset is called in oci_rc macro now.
+	    change oci8_get_svcctx() scope to global.
+	    implement OCI8#commit, OCI8#rollback, OCI8#non_blocking?,
+	    OCI8#non_blocking=, OCI8#break in C layer.
+	* ext/oci8/oci8.h: move oci8_svcctx_t from oci8.c.
+	    implement oci_rc2 and oci_rc macro.
+	* ext/oci8/stmt.c: change oci8_stmt_execute() and oci8_stmt_fetch()
+	    to use oci_rc macro.
+	* lib/oci8.rb.in: delete non-blocking handling code.
+	    delete OCI8#commit, OCI8#rollback, OCI8#non_blocking?,
+	    OCI8#non_blocking=, OCI8#break from ruby layer.
+
+2006-01-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8lib.c: rename OCI8Base to OCIHandle.
+
+2006-01-28  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/const.c: delete this file.
+	    delete global constants OCI_TYPECODE_*.
+	* ext/oci8/extconf.rb: delete const.o from compilation objects.
+	* ext/oci8/oci8lib.c: move oci8_id_new, OCI_DEFAULT and
+	    OCI_COMMIT_ON_SUCCESS from const.c.
+	    rename Init_oci8_svcctx() to Init_oci8().
+	* ext/oci8/oci8.c: rename Init_oci8_svcctx() to Init_oci8().
+	* ext/oci8/oci8.h: rename Init_oci8_svcctx() to Init_oci8() and so on...
+
+2006-01-28  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/error.c, ext/oci8/oci8.c,
+	    ext/oci8/ocidatetime.c, ext/oci8/oradate.c,
+	    ext/oci8/oranumber.c, ext/oci8/param.c, ext/oci8/rowid.c,
+	    ext/oci8/stmt.c: fix indentation.
+	* .cvsignore, ext/oci8/.cvsignore: added.
+
+2005-10-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8lib.c, ext/oci8/oci8.c, ext/oci8/svcctx.c, ext/oci8/extconf.rb:
+	    oci8.c is renamed to oci8lib.c.
+	    svcctx.c is renamed to oci8.c.
+
+2005-10-22  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/ocidatetime.c: fix to bind OCIDateTime.
+	* ext/oci8/oraconf.rb: add -R to linker on Solaris and Linux.
+	  http://rubyforge.org/tracker/index.php?func=detail&aid=2148&group_id=256&atid=1051
+	* ext/oci8/svcctx.c: change a setter name. __non_blocking= doesn't work. use 
+	  __set_non_blocking instead.
+	* lib/oci8.rb.in: add ruby's Datetime support.
+	* lib/ocidatetime.rb: add a ruby's Datetime support file.
+	* test/test_all.rb: fix 
+	* test/test_break.rb: add two assesion to check a non_blocking status.
+	* test/test_dbi.rb, test/test_oci8.rb: testcases for DateTime.
+	* test/test_oradate.rb: delete an unsuccessfull testcase, which depends on libc implementation.
+
+2005-07-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/lob.c, ext/oci8/oci8.c, ext/oci8/oci8.h, lib/oci8.rb.in:
+	  delete OCILobLocator. implement OCI8::LOB by C instead of ruby.
+	* ext/oci8/svcctx.c: add more check in oci8_get_svcctx().
+
+2005-07-17  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h, ext/oci8/ocidatetime.c,
+	  ext/oci8/ocinumber.c, ext/oci8/oradate.c, ext/oci8/oranumber.c,
+	  ext/oci8/rowid.c, ext/oci8/stmt.c, ext/oci8/svcctx.c:
+	  change arguments of (oci8_bind_class_t *)->init(). change the return
+	  value of oci8_get_svcctx(). add oci8_get_oci_session().
+	* lib/oci8.rb.in: change arguments of OCI8::BindType:Base.new().
+
+2005-07-16  KUBO Takehiro  <kubo@jiubao.org>
+	* metaconfig: move "require 'base64'" and "require 'zlib'" to the
+	  next line of "def get_zcontent(file)" for a ruby which doesn't
+	  have 'zlib'.
+
+2005-07-10  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/svcctx.c, lib/oci8.rb.in:
+	  OCISvcCtx class is merged to OCI8 class. OCISvcCtx's public instance
+	  methods become OCI8's private instance methods.
+	* ext/oci8/depend: deleted.
+
+2005-07-10  KUBO Takehiro  <kubo@jiubao.org>
+	* Makefile, ext/oci8/extconf.rb: change version to 0.2.0-alpha.
+	* ext/oci8/extconf.rb: add "ocidatetime.o" to $objs. add '--with-instant-client'
+	  to Makefile when setup.rb is called with '--with-instant-client'.
+	* ext/oci8/oci8.c: add oci8_base_class. fix bug in oci8_handle_initialize().
+	  call Init_oci_datetime() in Init_oci8().
+	* ext/oci8/oci8.h: add macros oci_lc, CHECK_STRING, TO_STRING_PTR and TO_STRING_LEN.
+	* ext/oci8/ocinumber.c: add oci8_get_ocinumber().
+	* ext/oci8/ocidatetime.c: add a new file for OCIDateTime.
+
+2005-07-09  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c, ext/oci8/lob.c, ext/oci8/oci8.h, ext/oci8/oradate.c,
+	   ext/oci8/oranumber.c, ext/oci8/rowid.c, ext/oci8/stmt.c:
+	   use doubly linked list to free OCI8::BindType::*.
+	* ext/oci8/extconf.rb, ext/oci8/oci8.c, ext/oci8/ocinumber.c: add OCINumber.
+
+2005-07-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/*.c, ext/oci8/*.h: remove oci8_handle_t and oci8_base_class_t.
+	  use oci8_base_t and oci8_bind_t instead of them. use oci8_base_class_t
+	  and oci8_bind_class_t.
+	* ext/oci8/descriptor.c, ext/oci8/handle.c: removed.
+	* ext/oci8/rowid.c: added.
+
+2005-07-01  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: try default $libs then get from demo_rdbms.mk.
+
+2005-06-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: don't read sysliblist when instant client.
+
+2005-06-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/const.c: delete unused constants.
+	   move some oci_id_* to ext/oci8/error.c.
+	   move oci8_sym_*stmt to ext/oci8/stmt.c.
+	* ext/oci8/error.c: 
+	   move some oci_id_* from ext/oci8/const.c.
+	   move subclasses of cOCIException from ext/oci8/oci8.c.
+	* ext/oci8/extconf.rb: add have_func("localtime_r").
+	* ext/oci8/handle.c: delete explicit OCIParam.
+	* ext/oci8/lob.c: delete #ifdef OCI8_USE_CALLBACK_LOB_READ.
+	* ext/oci8/oci8.c: 
+	   move subclasses of cOCIException to ext/oci8/error.c.
+	   move cOraDate to ext/oci8/oradate.c.
+	   move cOraNumber to ext/oci8/oranumber.c.
+	* ext/oci8/oci8.h:
+	   move ora_date_t to ext/oci8/oradate.c.
+	   move ora_number_t and ora_vnumber_t to ext/oci8/oranumber.c.
+	* ext/oci8/oradate.c: fix indentation.
+	   move cOraDate from ext/oci8/oci8.c.
+	   move ora_date_t from ext/oci8/oci8.h.
+	* ext/oci8/oranumber.c: fix indentation.
+	   move cOraNumber from ext/oci8/oci8.c.
+	   move ora_number_t and ora_vnumber_t from ext/oci8/oci8.h.
+	* ext/oci8/param.c: delete OCIParam#paramGet().
+	* ext/oci8/stmt.c: 
+	   move oci8_sym_*stmt from ext/oci8/const.c.
+	   fix OCIStmt#prepare() and OCIStmt#execute().
+
+2005-06-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/bind.c: add oci8_register_bind_type().
+	   move bind_rowid* to ext/oci8/descriptor.c.
+	   move bind_clob* and bind_blob* to ext/oci8/lob.c.
+	   move bind_oradate* to ext/oci8/oradate.c.
+	   move bind_oranumber* and bind_integer* to ext/oci8/oranumber.c.
+	   move bind_stmt* to ext/oci8/stmt.c.
+	* ext/oci8/const.c: add oci8_sym_*_stmt. delete ruby constants OCI_STMT_*.
+	* ext/oci8/descriptor.c: move bind_rowid* from ext/oci8/bind.c.
+	* ext/oci8/lob.c: move bind_clob* and bind_blob* from ext/oci8/bind.c.
+	* ext/oci8/oci8.c: change initialization order for oci8_register_bind_type().
+	* ext/oci8/oci8.h: add oci8_register_bind_type(). add oci8_sym_*_stmt.
+	* ext/oci8/oradate.c: move bind_oradate* from  ext/oci8/bind.c.
+	   oci8_set_ora_date() become a static function.
+	   delete oci8_get_ora_date().
+	* ext/oci8/oranumber.c: move bind_oranumber* and bind_integer* from ext/oci8/bind.c.
+	* ext/oci8/stmt.c: move bind_stmt* from ext/oci8/bind.c.
+	   OCIStmt#stmt_type returns a Symbol instead of a Fixnum.
+	* lib/oci8.rb.in: OCI8::Cursor#type returns a Symbol instead of a Fixnum.
+
+2005-06-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/extconf.rb: add have_func("OCILobLocatorAssign").
+	* ext/oci8/lob.c: delete OCILobLocator#getChunkSize().
+	   use OCILobAssign instead of OCILobLocatorAssign on Oracle 8.
+	* ext/oci8/attr.c, ext/oci8/oci8.h: delete OCI*#attrGet(), OCI*#attrSet().
+	* ext/oci8/const.c: delete OCI_ATTR_* constants.
+	* ext/oci8/descriptor.c: delete OCIDescriptor#attrGet(), OCIDescriptor#attrSet().
+	* ext/oci8/handle.c: delete OCIHandle#attrGet(), OCIHandle#attrSet().
+	* ext/oci8/param.c: add OCIParam#name, OCIParam#data_type, OCIParam#data_size, 
+	   OCIParam#precision and OCIParam#scale.
+	* ext/oci8/stmt.c: add OCIStmt#stmt_type, OCIStmt#row_count, OCIStmt#rowid and
+	   OCIStmt#param_count.
+	* lib/oci8.rb.in: use OCIParam#name, OCIParam#data_type, OCIParam#data_size, 
+	   OCIParam#precision, OCIParam#scale, OCIStmt#stmt_type, OCIStmt#row_count, 
+	   OCIStmt#rowid and OCIStmt#param_count instead of OCIHandle#attrGet() and
+	   OCIDescriptor#attrGet().
+
+2005-06-12  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: rewrie OraConf#check_lp64().
+	* ext/oci8/bind.c, ext/oci8/descriptor.c, ext/oci8/env.c,
+	  ext/oci8/handle.c, ext/oci8/lob.c, ext/oci8/oci8.h,
+	  ext/oci8/stmt.c, ext/oci8/svcctx.c, lib/oci8.rb.in:
+	   delete an OCIEnv instance from each instance method's argument.
+	   get it from the internal global variable in C.
+	* ext/oci8/oci8.c, lib/DBD/OCI8/OCI8.rb: change the OCIBind class name
+	   to OCI8::BindType::Base.
+	* lib/oci8.rb.in: fix typo rb_eArgError to ArgumentError.
+
+2005-06-08  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: test __64BIT__ to check whether lp64. (for AIX 64bit)
+
+2005-05-31  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: fix for cygwin. fix for oracle instant client.
+	* metaconfig: add distbin task.
+
+2005-05-29  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: change the detection logic for Multiple
+	  Oracle Homes on Windows.
+
+2005-05-24  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: use "-L#{@oracle_home}/lib(32) -lclntsh" as
+	   a last resort.
+
+2005-04-14  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: fix for Cygwin with Oracle instant client.
+	   add Oraconf#lp64, which is true when long and pointer are 64 bits.
+	   improve error message.
+
+2005-04-10  KUBO Takehiro  <kubo@jiubao.org>
+	* README: change the document format for rdoc.
+	* ext/oci8/bind.c, ext/oci8/descriptor.c, ext/oci8/env.c,
+	   ext/oci8/error.c, ext/oci8/const.c, ext/oci8/handle.c
+	   ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/stmt.c:
+	   change bind_type_t structure. bind_* variables in binc.c
+	   become OCI8::BindType::* which are subclasses of OCIBind.
+	   add envh member to oci8_handle_t and oci8_bind_handle_t.
+	   add OCIRowid#initialize.
+	   delete macros to compile on ruby 1.6.
+	* lib/oci8.rb.in: add comments for rdoc.
+	   change OCI8::BindType::*.
+	* lib/DBD/OCI8/OCI8.rb
+	   change DBI::DBD::OCI8::BindType::*.
+
+2005-04-06  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oci8.h, ext/oci8/handle.c: delete enum oci8_bind_type.
+	  add oci8_bind_type_t.
+	* ext/oci8/bind.c: add oci8_bind_type_t structures bind_string, bind_raw,
+	   bind_fixnum, bind_float, bind_oradate, bind_integer, bind_oranumber,
+	   bind_rowid, bind_clob, bind_blob, and bind_stmt.
+	   add oci8_bind_type_set() and oci8_bind_type_get() to get/set 
+	   an oci8_bind_type_t structure.
+	   delete oci8_get_value() and oci8_set_value(), use
+	   (oci8_bind_type_t*)->get()/set() instead.
+	* ext/oci8/stmt.c: change check_bind_type() by using oci8_bind_type_t.
+	  change oci8_define_by_pos(), oci8_bind_by_pos() and oci8_bind_by_name().
+	* ext/oci8/MANIFEST, ext/oci8/depend, ext/oci8/extconf.rb, ext/oci8/oci8.c,
+	  ext/oci8/define.c: delete define.c and Init_define().
+	* lib/oci8.rb.in: change OCI8::BindType::Float, OCI8::BindType::Fixnum,
+	  OCI8::BindType::Integer and OCI8::BindType::OraNumber for in-bind.
+
+2005-04-03  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/oraconf.rb: improve Oracle instance client check:
+	   1. add more strict libclntsh.so check.
+	   2. change LD_LIBRARY_PATH message by its platform.
+	   3. add '-Wl,-rpath,#{lib_dir}' to $libs when Linux.
+	* ext/oci8/MANIFEST, ext/oci8/depend, ext/oci8/extconf.rb:
+	   delete server.c and session.c.
+	* ext/oci8/attr.c: delete OCISvcCtx#attrGet(OCI_ATTR_NONBLOCKING_MODE),
+	   OCISvcCtx#attrSet(OCI_ATTR_NONBLOCKING_MODE, nil),
+	   OCISvcCtx#attrSet(OCI_ATTR_SERVER, aOCIServer),
+	   OCISvcCtx#attrSet(OCI_ATTR_SESSION, aOCISession).
+	* ext/oci8/const.c: delete constants unused by high-level API.
+	   delete oci8_id_server, oci8_id_session.
+	* ext/oci8/handle.c, ext/oci8/descriptor.c: use ruby1.8 allocation
+	   framework.
+	* ext/oci8/env.c: add OCIEnv.new. delete OCIEnv.initialise(),
+	   OCIEnv.init(), OCIEnv.create(), OCIEnv.terminate(),
+	   OCIEnv#alloc(), OCIEnv#logon().
+	* ext/oci8/oci8.c, ext/oci8/oci8.h: use ruby1.8 allocation
+	   framework. delete OCIServer and OCISession.
+	* ext/oci8/lob.c: add OCILobLocator.new
+	* ext/oci8/stmt.c: add OCIStmt.new
+	* ext/oci8/svcctx.c: add OCISvcCtx.new, OCISvcCtx#non_blocking?,
+	   OCISvcCtx#non_blocking=
+	* ext/oci8/server.c, ext/oci8/session.c: deleted.
+	* lib/oci8.rb.in: use OCIEnv.new and OCISvcCtx.new instead of
+	   OCIEnv.create, OCIEnv#alloc, OCISession#begin, OCIServer#attach.
+	   use OCISvcCtx.logoff instead of OCISession#end, OCIServer#detach,
+	   OCISvcCtx.free. use OCISvcCtx#non_blocking? instead of
+	   OCISvcCtx#attrGet(OCI_ATTR_NONBLOCKING_MODE).
+	   use OCISvcCtx#non_blocking= instead of
+	   OCISvcCtx#attrSet(OCI_ATTR_NONBLOCKING_MODE, nil).
+	   use <OCICLASS>.new(anOCIEnv) instead of
+	   OCIEnv#alloc(<OCIClass>)
+	* lib/DBD/OCI8/OCI8.rb: use OCIStmt.new(env) instead of
+	   env.alloc(OCIStmt).
+
+2005-03-27  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/server.c: delete OCIServer#version, OCIServer#break, OCIServer#reset.
+	* ext/oci8/stmt.c: OCIStmt#bindByName accepts a symbol as a bind name.
+	* lib/oci8.rb.in: add OCI8::LOB#sync, OCI8::LOB#sync= and OCI8::LOB#flush.
+	* test/test_bind_raw.rb, test/test_bind_time.rb, test/test_clob.rb,
+	  test/test_oradate.rb, test/test_oranumber.rb: use OCI8 high-level API
+	  instead of low-level API.
+
+2005-03-24  KUBO Takehiro  <kubo@jiubao.org>
+	* oci8.rb.in: fix bug on binding Time or Date.
+	* support/*: deleted.
+	* test/*.rb: use 'test/unit' instead of runit.
+	  ruby 1.6.8 won't be supported by this commit.
+	* ext/oci8/MANIFEST, ext/oci8/depend, ext/oci8/describe.c(deleted),
+	  ext/oci8/env.c, ext/oci8/extconf.rb, ext/oci8/handle.c,
+	  ext/oci8/oci8.c, ext/oci8/oci8.h, ext/oci8/svcctx.c:
+	  delete OCIDescribe and OCISvcCtx#describeAny. OCIDescribe isn't used by
+	  oci8 high-level API.
+	* test/test_all.rb, test/test_describe.rb(deleted): delete OCIDescribe
+	  test cases.
+
+2005-03-23  KUBO Takehiro  <kubo@jiubao.org>
+	* oci8.rb.in, OCI8.rb:
+	delete OCI8.register_type_fixer, OCI8::TypeFixer.
+	add OCI8::BindType::* instead.
+
+2005-03-21  KUBO Takehiro  <kubo@jiubao.org>
+	* oci8.rb.in, OCI8.rb: refactoring OCI8::Cursor#define_a_column
+	* Makefile, ext/oci8/extconf.rb: change version to 0.1.10
+
+2005-03-20  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c, lib/oci8.rb.in, lib/DBD/OCI8/OCI8.rb, test/test_dbi.rb:
+	  enable DATE to be bound as a DBI::Date or a DBI::Timestamp.
+
+2005-03-20  KUBO Takehiro  <kubo@jiubao.org>
+	* ext/oci8/stmt.c, lib/oci8.rb.in, test/test_oci8.rb:
+	  bind a ref cursor as an OCI8::Cursor.
+          apply a patch at <URL:http://rubyforge.org/tracker/index.php?func=detail&aid=1409&group_id=256&atid=1053>.
+
+2005-01-16  KUBO Takehiro  <kubo@jiubao.org>
+
+	* lib/oci8.rb.in: change default bindtype for NUMBER with
+	  unspecified scale.
+	  (This problem is reported by William Lawson, Dmitry Maksyoma and Andreas Habel)
+	* lib/oci8.rb.in: add OCI8::Cursor.select_number_as=
+	  (for someone who want old bindtype)
+	* lib/oci8.rb.in: add OCI8::Cursor#fetch_hash
+	  (contributed by Jason Sweat)
+	* ext/oci8/oci8.h, ext/oci8/stmt.c: don't raise an error when OCI_SUCCESS_WITH_INFO.
+	  (suggested by Kenji Nishishiro)
+	* ext/ooi8/oraconf.rb: support Oracle Instant Installer.
+	  (suggested by Eustaquio Rangel de Oliveira Jr.)
+	* Makefile, ext/oci8/extconf.rb: change version to 0.1.9
+
+2004-10-30  KUBO Takehiro  <kubo@jiubao.org>
+
+	* pre-distclean.rb: delete a temporary file made by ext/oci8/oraconf.rb.
+	* ext/oci8/oraconf.rb: 1. change object files to an archive file
+	  to work around on Oracle 8.1.7. 2. raise error when OCI.H can't
+	  be found on Windows.
+
+2004-06-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile, ext/oci8/extconf.rb: change version to 0.1.8-pre1
+	* lib/DBD/OCI8/OCI8.rb: add DBI::DatabaseHandle#tables. add DBI::StatementHandle#func(:bind_value, ...).
+
+2004-03-07  KUBO Takehiro  <kubo@jiubao.org>
+
+	* ext/oci8/extconf.rb: fix to use setup.rb.
+	* ext/oci8/oraconf.rb: add support Borland C++ Builder.
+	* lib/oci8.rb.in: support OCI8::CLOB.
+	* test/config.rb: CLOB test file depends on NLS_LANG.
+	* test/test_oci8.rb: fix a test method.
+	* test/test_break.rb: break time depends on OS?...
+	* test/test_dbi_clob.rb: add a new file to test CLOB via DBI.
+
+2003-09-20  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/handle.c: fix bug of OCI8::BLOB at running GC.
+	* src/stmt.c: accept Bignum as (({type})) of OCI8::Cursor#define.
+	* src/lib/oci8.rb.in: accept OCI8::BLOB as (({type})) of OCI8::Cursor#define.
+	* src/lib/DBD/OCI8/OCI8.rb: add (({define})) function to DBD::OCI8.
+	* src/oranumber.c, src/oci8.h: use rb_cstr_to_dbl instead of strtod for ruby 1.8.
+	* support/runit/cui/testrunner.rb, support/runit/testcase.rb: fix for ruby 1.8.
+	* test/test_dbi.rb: add a test method.
+	* test/test_oci8.rb: fix a test method.
+
+2003-08-03  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.5
+	* MANIFEST: add test/test_oci8.rb
+	* src/lib/oci8.rb.in: implement OCI8::Cursor#define, OraDate#to_time and OraDate#to_date.
+	* test/test_oci8.rb: add new tests of OCI8::Cursor#define.
+	* test/test_oradate.rb: add new tests of OraDate#to_time and OraDate#to_date.
+	* test/test_all.rb: call test_oci8.rb.
+
+2003-07-20  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/stmt.c: When the error "ORA-01000: maximum open cursors
+	  exceeded" happens, run garbage collect to close unused cursors
+	  and retry automatically.
+
+2003-06-07  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.4
+	* src/lob.c: add OCILobLocator#clone()
+	* src/bind.c, src/stmt.c, src/lib/oci8.rb.in: fix BLOB support.
+	* src/lib/DBD/OCI8/OCI8.rb: set the backtrace of an original exception
+	 to newly created DBI exception.
+	* src/oraconf.rb: retry get_libs with postfix '32' when	compilation
+	 failed with Oracle 9i on Solaris.
+	* src/oradate.c: add OraDate#<=> and include 'Comparable'.
+	 (contributed by Brian Candler)
+	* test/test_oradate.rb: add test cases of OraDate#<=>.
+
+2003-04-27  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.3
+	* doc/api.*.rd, doc/api.*.html: update document.
+	* src/lob.c: add new LOB APIs.
+	* src/lib/oci8.rb.in: add BLOB support.
+	* src/lib/DBD/OCI8/OCI8.rb: add 'NonBlocking' support(suggested by Brian Candler).
+	raise subclass of DBI::DatabaseError, which depends on its error code.
+
+2003-03-08  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.2
+	* src/extconf.rb: use Oraconf#cc_is_gcc.
+	* src/oraconf.rb: support Solaris with gcc.
+	* src/handle.c: suppress warning about uninitialized instance variables.
+	* src/oranumber.c, test/test_oranumber.rb: fix serious bug of 
+	conversion routine from Oracle internal number format to string.
+
+2003-02-01  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.1.
+	* src/oraconf.rb: added. Oracle specific features were moved from
+	src/extconf.rb, src/extunix.rb and src/extwin32.rb
+	* src/extunix.rb, src/extwin32.rb: deleted.
+	* src/extconf.rb: use oraconf.rb.
+	* src/error.c, src/oci8.h: use macro RBOCI_NORETURN not NORETURN.
+	* MANIFEST, Makefile: fix for added and deleted files.
+
+2002-09-12  KUBO Takehiro  <kubo@jiubao.org>
+
+	* Makefile: update version to 0.1.0.
+	* README: support cygwin and mingw32.
+	* test/test_oradate.rb: delete test_now().
+	* src/extconf.rb: support mingw32.
+
+2002-09-12  Hitoshi Endoh <h-endoh@mbf.nifty.com>
+
+	* src/extwin32.rb: support cygwin.
+
+2002-09-12  KUBO Takehiro  <kubo@jiubao.org>
+
+	* ChangeLog: Added.

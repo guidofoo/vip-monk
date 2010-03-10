@@ -1,0 +1,82 @@
+
+#   --*- ruby -*--
+# This is based on yoshidam's oracle.rb.
+#
+# sample one liner:
+#  ruby -r oci8 -e 'OCI8.new("scott", "tiger", nil).exec("select * from emp") do |r| puts r.join(","); end'
+#  # select all data from emp and print them as CVS format.
+
+if RUBY_PLATFORM =~ /cygwin/
+  # Cygwin manages environment variables by itself.
+  # They don't synchroize with Win32's ones.
+  # This set some Oracle's environment variables to win32's enviroment.
+  require 'Win32API'
+  win32setenv = Win32API.new('Kernel32.dll', 'SetEnvironmentVariableA', 'PP', 'I')
+  ['NLS_LANG', 'ORA_NLS10', 'ORA_NLS32', 'ORA_NLS33', 'ORACLE_BASE', 'ORACLE_HOME', 'ORACLE_SID', 'TNS_ADMIN', 'LOCAL'].each do |name|
+    val = ENV[name]
+    win32setenv.call(name, val && val.dup)
+  end
+end
+
+case RUBY_VERSION
+when /^1\.9/
+  require 'oci8lib_191'
+when /^1\.8/
+  require 'oci8lib_18'
+else
+  raise 'unsupported ruby version: ' + RUBY_VERSION
+end
+
+if OCI8.respond_to? :encoding
+  if defined? DEFAULT_OCI8_ENCODING
+    OCI8.encoding = DEFAULT_OCI8_ENCODING
+  else
+    load 'oci8/encoding-init.rb'
+  end
+end
+
+require 'oci8/oracle_version.rb'
+
+class OCI8
+  ORAVER_8_0  = OCI8::OracleVersion.new(8, 0)
+  ORAVER_8_1  = OCI8::OracleVersion.new(8, 1)
+  ORAVER_9_0  = OCI8::OracleVersion.new(9, 0)
+  ORAVER_9_2  = OCI8::OracleVersion.new(9, 2)
+  ORAVER_10_1 = OCI8::OracleVersion.new(10, 1)
+  ORAVER_10_2 = OCI8::OracleVersion.new(10, 2)
+  ORAVER_11_1 = OCI8::OracleVersion.new(11, 1)
+
+  @@oracle_client_version = OCI8::OracleVersion.new(self.oracle_client_vernum)
+
+  # :call-seq:
+  #   OCI8.oracle_client_version -> oraver
+  #
+  # Returns an OCI8::OracleVersion of the Oracle client version.
+  #
+  # If this library is configured without '--with-runtime-check',
+  # and compiled for Oracle 10.1 or lower, the major and minor
+  # numbers are determined at compile-time. The rests are zeros.
+  #
+  # If this library is configured with '--with-runtime-check'
+  # and the runtime Oracle library is Oracle 10.1 or lower, the
+  # major and minor numbers are determined at run-time. The
+  # rests are zeros.
+  #
+  # Otherwise, it is the version retrieved from an OCI function
+  # OCIClientVersion().
+  def self.oracle_client_version
+    @@oracle_client_version
+  end
+end
+
+require 'oci8/datetime.rb'
+require 'oci8/oci8.rb'
+require 'oci8/bindtype.rb'
+require 'oci8/metadata.rb'
+require 'oci8/compat.rb'
+require 'oci8/object.rb'
+
+class OCI8
+  VERSION = '@@OCI8_MODULE_VERSION@@'
+  CLIENT_VERSION = '@@OCI8_CLIENT_VERSION@@'
+end
