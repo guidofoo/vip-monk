@@ -1,0 +1,17 @@
+#attr.c
+#oci8lib.c
+#env.c
+
+oci8.c
+ocihandle.c
+bind.c
+stmt.c
+encoding.c
+error.c
+metadata.c
+
+lob.c
+ocinumber.c
+ocidatetime.c
+oradate.c
+object.c

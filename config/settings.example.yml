@@ -7,14 +7,23 @@ defaults: &defaults
   <<: *defaults
   :log_level: debug
   :sequel:
+    # Sqlite3
     :adapter: sqlite
     :database: 'db/development.db'
+
+    # Oracle
+    # :adapter: oracle
+    # :host: "ec2-75-101-186-222.compute-1.amazonaws.com"
+    # :user: "ruby"
+    # :password: "ruby"
+    # :port: 1521
 
 :test:
   <<: *defaults
   :redis:
     :port: 6380
   :sequel:
+    # Sqlite3
     :adapter: sqlite
     :database: 'db/test.db'
 
