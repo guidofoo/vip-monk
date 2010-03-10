@@ -6,11 +6,17 @@ defaults: &defaults
 :development:
   <<: *defaults
   :log_level: debug
+  :sequel:
+    :adapter: sqlite
+    :database: 'db/development.db'
 
 :test:
   <<: *defaults
   :redis:
     :port: 6380
+  :sequel:
+    :adapter: sqlite
+    :database: 'db/test.db'
 
 :production:
   <<: *defaults

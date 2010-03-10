@@ -3,6 +3,8 @@
 /config/redis/test.conf
 /db/redis/development
 /db/redis/test
+/db/development.db
+/db/test.db
 /tmp
 /webrat.log
 /vendor/webrat/vendor

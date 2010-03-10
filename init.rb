@@ -19,11 +19,12 @@ class Main < Monk::Glue
   use Rack::Session::Cookie
 end
 
-# Connect to redis database.
+# Connect to Redis database.
 Ohm.connect(settings(:redis))
 
-# Sequel.oracle host: "ec2-75-101-186-222.compute-1.amazonaws.com", user: "ruby", password: "ruby", port: 1521
-Sequel.sqlite database: "development.sqlite3"
+# Connect to the Sqlite3 database.
+db = settings(:sequel)
+Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db])
 
 # Load all application files.
 Dir[root_path("app/**/*.rb")].each do |file|
