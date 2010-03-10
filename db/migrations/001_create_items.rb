@@ -5,7 +5,7 @@ class CreateItems < Sequel::Migration
       varchar     :title
     end
   end
-  
+
   def down
     drop_table :items
   end

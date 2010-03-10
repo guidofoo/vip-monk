@@ -39,7 +39,7 @@ class Monk < Thor
     File.exists?(example) ? copy_file(example, target) : say_status(:missing, example)
   end
 
-	desc "init", "Initialize the environment"
+  desc "init", "Initialize the environment"
   def init
     require "init"
   end
@@ -48,7 +48,7 @@ class Monk < Thor
   def migrate
     invoke :init
 
-		require "sequel/extensions/migration"
+    require "sequel/extensions/migration"
 
     version = ENV["VERSION"] ? ENV["VERSION"].to_i : nil
     puts "Migrating to version #{ version || "<latest>" }"
