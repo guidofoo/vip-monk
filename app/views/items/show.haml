@@ -67,7 +67,7 @@
                   %td#tdMainImg{ :align => "center", :width => "280", :height => "280" }
                     #divMainImg{ :style => "display:inline" }
                       %a#linkMainImg{ :href => "javascript:showVisor()" }
-                        %img#mainImg{ :src => "http://www.mercadolibre.com.ar/jm/img?s=MLA&f=61826546_3253.jpg&v=E", :border => "none", :align => "top", :alt => "iPod touch 32gb 3ra generacion, caja sellada", :title => "iPod touch 32gb 3ra generacion, caja sellada" }
+                        %img#mainImg{ :src => "http://www.mercadolibre.com.ar/jm/img?s=MLA&f=#{@item.image}&v=E", :border => "none", :align => "top", :alt => "iPod touch 32gb 3ra generacion, caja sellada", :title => "iPod touch 32gb 3ra generacion, caja sellada" }
           %td{ :width => "59%", :valign => "top", :style => "padding:0 5px 0 10px;" }
             %h1
               = @item.title
@@ -130,7 +130,8 @@
                             )
                       %br
                       %div{ :style => "clear: both;" }
-                        Sells on this article: 10
+                        Sells on this article: 
+                        =@item.qty_bids
                         %a{ :href => "" }
                       %br
     .font11.denunhd
