@@ -1,7 +1,7 @@
 class AddDescriptionToItems < Sequel::Migration
   def up
     alter_table :items do
-      add_column :description, varchar
+      add_column :description, String
     end
   end
 
