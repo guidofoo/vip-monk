@@ -77,7 +77,8 @@
                   Price:
                 %td{ :width => "84%", :valign => "middle" }
                   %span.price
-                    $ 1500
+                    $ 
+                    = @item.price.to_i 
                     %span.decimales
                       99
               %tr
@@ -152,8 +153,8 @@
               /
                 http://opinion.mercadolibre.com.ar/ipod-touch-32-gb-tercera-generacion-584879-VCP
     #descriptionCont
-      #Descripcin.contentbox
-        %img{ :alt => "", :src => "http://www.digitalplus-miami.com/ml/anuncioipodtouchok32GB.jpg" }
+      #Descripcion.contentbox
+        = @item.description
         /
     #Fichatcnica.contentbox{ :align => "center", :style => "display: none;" }
       #catalogTab

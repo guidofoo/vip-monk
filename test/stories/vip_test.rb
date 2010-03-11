@@ -1,13 +1,10 @@
 require "stories_helper"
+require "webrat"
 
 class VIPTest < Test::Unit::TestCase
-  setup do
-    Item.delete
-  end
-
   feature "View item page" do
     setup do
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100.23, description: "description"
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description"
     end
 
     scenario "A user visiting the page should see the title" do
@@ -19,12 +16,19 @@ class VIPTest < Test::Unit::TestCase
     scenario "A user visiting the page should see item price" do
       visit "/items/#{@item.id}"
 
+      within ".price" do
+        debugger
+        assert_contain @item.price.to_i.to_s
+      end
+
     end
 
     scenario "A user visiting the page should see the description" do
-      visit "/item/#{@item.id}"
+      visit "/items/#{@item.id}"
 
-      assert_contain "description"
+      within "#descriptionCont" do
+        assert_contain @item.description
+      end
     end
 
   end
