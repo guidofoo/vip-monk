@@ -4,7 +4,7 @@ require "webrat"
 class VIPTest < Test::Unit::TestCase
   feature "View item page" do
     setup do
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description"
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg"
     end
 
     scenario "A user visiting the page should see the title" do
@@ -17,10 +17,8 @@ class VIPTest < Test::Unit::TestCase
       visit "/items/#{@item.id}"
 
       within ".price" do
-        debugger
         assert_contain @item.price.to_i.to_s
       end
-
     end
 
     scenario "A user visiting the page should see the description" do
@@ -31,5 +29,12 @@ class VIPTest < Test::Unit::TestCase
       end
     end
 
+    scenario "A user visiting the page should see an image" do
+      visit "/items/#{@item.id}"
+
+      within "#linkMainImg" do
+        assert_contain @item.image
+      end
+    end
   end
 end
