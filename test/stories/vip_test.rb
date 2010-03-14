@@ -33,7 +33,7 @@ class VIPTest < Test::Unit::TestCase
       visit "/items/#{@item.id}"
 
       within ".datavend" do
-         assert_contain @item.qty_bids.to_i.to_s
+        assert_contain @item.qty_bids.to_i.to_s
       end
     end
 
@@ -41,10 +41,11 @@ class VIPTest < Test::Unit::TestCase
     scenario "A user visiting the page should see the image" do
       visit "/items/#{@item.id}"
 
-      within "#linkMainImg" do
+      within "#linkMainImg" do |scope|
         assert_contain @item.image
       end
-     end
+    end
+
   end
 
 end

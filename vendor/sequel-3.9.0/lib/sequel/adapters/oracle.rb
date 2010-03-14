@@ -74,13 +74,7 @@ module Sequel
       alias_method :do, :execute
 
       private
-
-      def alter_table_sql(table, op)
-        sql = super(table, op)
-        sql.gsub! /\bADD COLUMN\b/, "ADD" if op[:op] == :add_column
-        sql
-      end
-
+      
       def begin_transaction(conn)
         log_info(TRANSACTION_BEGIN)
         conn.autocommit = false
