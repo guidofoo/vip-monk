@@ -44,9 +44,8 @@ class VIPTest < Test::Unit::TestCase
     scenario "A user visiting the page should see the bids quantity" do
       visit "/items/#{@item.id}"
 
-      within ".datavend" do |scope|
-        assert_contain_in_scope scope, "Sells on this article"
-        assert_contain_in_scope scope, "35"
+      within ".datavend" do
+        assert_contain @item.qty_bids.to_i.to_s
       end
     end
 
@@ -69,8 +68,11 @@ class VIPTest < Test::Unit::TestCase
 
       # within "#divMainImg" do
         # assert_contain @item.image
+      # within "#linkMainImg" do |scope|
+      #  58         assert_contain @item.image
       # end
      # end
    end
-
 end
+
+
