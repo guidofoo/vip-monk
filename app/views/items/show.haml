@@ -109,14 +109,15 @@
                       %div
                         %span#Nickname
                           %span#MyNickname{ :style => "margin-top: 5px; display: inline; float: left; padding-bottom: 2px;" }
-                            Matata
+                            = @customer.nickname
                           %span{ :title => "" }
                         %div{ :style => "clear: both;" }
                       %span.font11{ :style => "clear: both;" }
                       #CalifPercentage{ :style => "width: auto; clear: both;" }
                         #puntos
                           Calification:
-                          95 Points
+                          = @customer.points.to_i.to_s
+                          Points
                         #posneg
                           #caja_pos
                             %span#link_pos
@@ -131,7 +132,7 @@
                       %br
                       %div{ :style => "clear: both;" }
                         Sells on this article: 
-                        =@item.qty_bids
+                        =@item.qty_bids.to_i
                         %a{ :href => "" }
                       %br
     .font11.denunhd
