@@ -1,3 +1,4 @@
 class Customer < Sequel::Model
-  one_to_many :item
+  set_dataset dataset.sequence(:seq_customers_id)
+  one_to_many :items
 end
