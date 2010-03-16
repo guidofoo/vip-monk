@@ -9,5 +9,16 @@ class Main
     #   def format_date(date, format = "%d/%m/%Y")
     #     date.strftime(format)
     #   end
+
+    # mock de helper de i18n
+    # hasta implementar solucion
+    def t(text)
+      "i18n text"
+    end
+
+    # idem anterior
+    def l(text,format)
+      "date/time format"
+    end
   end
 end

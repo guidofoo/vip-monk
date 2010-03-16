@@ -5,10 +5,15 @@ class Item < Sequel::Model
  # set_dataset dataset.sequence(:seq_items_id)
   many_to_one :customer
   many_to_one :site
+  many_to_one :category
+  many_to_one :catalog_product
+
   one_to_many :questions
   one_to_many :califications
 
-  def to_hash 
+  one_to_many :payment_methods
+
+  def to_hash
     values
   end
 
@@ -25,5 +30,10 @@ class Item < Sequel::Model
       end
     end
     xml
+  end
+
+  # Trae los demas items de un customer
+  def items_seller(customer_id, item_id)
+    Item.filter(:customer_id => customer_id).exclude(:id => item_id)
   end
 end
