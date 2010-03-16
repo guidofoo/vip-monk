@@ -33,7 +33,7 @@ class Item < Sequel::Model
   end
 
   # Trae los demas items de un customer
-  def items_seller(customer_id, item_id)
-    Item.filter(:customer_id => customer_id).exclude(:id => item_id)
+  def items_seller
+    Item.filter(:customer_id => self.customer_id).exclude(:id => self.id)
   end
 end

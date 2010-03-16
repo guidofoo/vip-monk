@@ -30,7 +30,7 @@ class Main
     @catalogProductAttrs = @product.catalog_product_attributes
     # @paymentMethods = @item.payment_methods
 
-    @items_seller = @item.items_seller(@customer.id, @item.id)
+    @items_seller = @item.items_seller
 
     haml :"items/show"
   end
