@@ -34,7 +34,7 @@ class Main
 
     @items_seller = @item.items_seller
 
-    haml :"items/show"
+     haml :"items/show"
   end
 
 end
