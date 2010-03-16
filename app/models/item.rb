@@ -38,4 +38,8 @@ class Item < Sequel::Model
   def items_seller
     Item.filter(:customer_id => self.customer_id).exclude(:id => self.id)
   end
+
+  def questions
+   Question.filter(:item_id => self.id).limit(30)
+  end
 end

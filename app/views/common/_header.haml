@@ -4,6 +4,9 @@
     /= h(yield(:title) || "Untitled")
   /
     %base{ :href => "http://www.mercadolibre.com.ar/argentina/ml/" }
+  %link{:rel => "stylesheet", :href => "/css/vip.css", :type => "text/css"}/
+  %script{ :src => "/js/vip.js" }
+  %script{ :src => "/js/jquery.min.js" }
   %link{ :rel => "stylesheet", :href => "http://www.mercadolibre.com.ar/jm/ml.api.webcomponent.CascadingStyleSheetsController?name=VIP3&visualId=STD&templateID=C_CI_TEMPLATE", :type => "text/css" }
   %script{ :src => "http://www.mercadolibre.com.ar/jm/ml.api.webcomponent.JavaScriptController?name=VIP3&visualId=STD&v=20081007.js" }
   %style
