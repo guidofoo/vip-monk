@@ -13,8 +13,8 @@ class VIPTest < Test::Unit::TestCase
 
   feature "View item page" do
     setup do
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", qty_bids: 35
-      @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_total: 100
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35
+      @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100
       @item.customer = @customer
       @item.save
     end

@@ -12,7 +12,7 @@ class Main
 
     # mock de helper de i18n
     # hasta implementar solucion
-    def t(text)
+    def t(*text)
       "i18n text"
     end
 

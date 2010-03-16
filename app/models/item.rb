@@ -11,7 +11,9 @@ class Item < Sequel::Model
   one_to_many :questions
   one_to_many :califications
 
-  one_to_many :payment_methods
+  many_to_many :payment_methods
+  many_to_many :ship_methods
+
 
   def to_hash
     values
