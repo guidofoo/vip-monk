@@ -1,5 +1,9 @@
 class Main
 
+  before do
+    @stamp = Time.new
+  end
+
   get "/items/:id.xml" do
     @item = Item[params[:id].to_i]
     content_type 'text/xml', :charset => 'utf-8'

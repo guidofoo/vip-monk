@@ -11,4 +11,4 @@
         %br
     %center
       gen:
-      /= t('app.render_time') % ((Time.now - @stamp)*1000)
+      = t.app.render_time % ((Time.now - @stamp)*1000)
