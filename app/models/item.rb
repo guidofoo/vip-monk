@@ -28,8 +28,9 @@ class Item < Sequel::Model
     xml = Builder::XmlMarkup.new( options )
     xml.instruct!
     xml.item do |item|
-      values.each do |name, val|
-        eval("item.#{name} val")
+      to_hash.each do |name, val|
+        meth = name.to_sym
+        item.send(meth, send(meth))
       end
     end
     xml
@@ -42,5 +43,9 @@ class Item < Sequel::Model
 
   def questions
    Question.filter(:item_id => self.id).limit(30)
+  end
+
+  def price
+    super.to_f
   end
 end
