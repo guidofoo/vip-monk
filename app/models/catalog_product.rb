@@ -7,7 +7,7 @@ class CatalogProduct < Sequel::Model
   def calculate_reviews_summary 
     suma = @qty5 = @qty4 = @qty3 = @qty2 = @qty1 = 0;
     for review in self.reviews do
-      eval("@qty" +review.points.to_s + "+=1")
+      eval("@qty" +review.points.to_i.to_s + "+=1")
       suma+=review.points
     end
     @prom = ((suma * 2) / self.reviews.length).round / 2.to_f

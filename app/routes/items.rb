@@ -28,6 +28,7 @@ class Main
     end
 
     @product = @item.catalog_product
+    @product.calculate_reviews_summary
     @reviews = @product.reviews
 
     @catalogProductAttrs = @product.catalog_product_attributes
