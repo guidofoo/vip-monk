@@ -1,7 +1,7 @@
 %head
   %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
   %title
-    /= h(yield(:title) || "Untitled")
+    = @pageTitle
   /
     %base{ :href => "http://www.mercadolibre.com.ar/argentina/ml/" }
   %link{:rel => "stylesheet", :href => "/css/vip.css", :type => "text/css"}/

@@ -16,8 +16,9 @@ class Main
     @item.to_json
   end
 
-  get "/items/:id" do
+  get "/items/:id" do    
     @item = Item[params[:id].to_i]
+    @pageTitle = @item.title
     @customer = @item.customer
     @questions = @item.questions
     @califications = @item.califications
