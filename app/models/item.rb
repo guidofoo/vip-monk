@@ -1,7 +1,10 @@
 require 'json'
 require 'builder'
+require 'slug'
 
 class Item < Sequel::Model
+  include Slug
+
  # set_dataset dataset.sequence(:seq_items_id)
   many_to_one :customer
   many_to_one :site
