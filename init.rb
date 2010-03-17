@@ -27,7 +27,7 @@ end
 
 # Connect to the Sqlite3 database.
 db = settings(:sequel)
-Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db.merge(logger: logger)])
+Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db.merge(logger: logger)]) if db[:adapter]
 
 # Load all application files.
 Dir[root_path("app/**/*.rb")].each do |file|
