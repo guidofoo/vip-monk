@@ -44,9 +44,9 @@ catalog:
     title: "Specs"
     print: "Print specs"
   reviews:
-    tab:
-      one: "1 review"
-      other: '{{count}} reviews'
+    tab: !!pl
+      1: "1 review"
+      n: %1 reviews
     title: "Reviewes"
     promedio: "Average"
     resumen:

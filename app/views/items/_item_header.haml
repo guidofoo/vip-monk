@@ -36,7 +36,7 @@
             %td{ :width => "84%", :valign => "middle" }
               %span.price
                 $
-                = @item.price
+                = @item.price.to_i
                 %span.decimales
                   99
           %tr
@@ -78,7 +78,7 @@
                     #puntos
                       = t.calificacion
                       \:
-                      = @customer.points
+                      = @customer.points.to_i
                       = t.puntos
                     #posneg
                       #caja_pos
@@ -101,7 +101,7 @@
                   %div{ :style => "clear: both;" }
                     = t.ventas
                     \:
-                    = @item.bids_count
+                    = @item.bids_count.to_i
                     %a{ :href => "" }
                   %br
 .font11.denunhd

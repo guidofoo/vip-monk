@@ -34,7 +34,7 @@
                 = t.questions.answer
               %br
               %span.font10
-                /= l question.question_dt, :format => :short
+                = l question.question_dt, t.time.formats.short
             .bloque
               = question.answer
             .denuncia2
