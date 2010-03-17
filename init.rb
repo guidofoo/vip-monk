@@ -13,8 +13,11 @@ require "ohm"
 require "haml"
 require "sass"
 require "sequel"
+require "sinatra/r18n"
 
 class Main < Monk::Glue
+  register Sinatra::R18n
+
   set :app_file, __FILE__
   use Rack::Session::Cookie
 end

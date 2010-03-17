@@ -31,7 +31,7 @@
         %table{ :width => "100%", :border => "0", :cellpadding => "0", :cellspacing => "0" }
           %tr
             %td{ :width => "16%", :height => "25" }
-              = t :precio
+              = t.precio
               \:
             %td{ :width => "84%", :valign => "middle" }
               %span.price
@@ -42,7 +42,7 @@
           %tr
           %tr
             %td{ :height => "25" }
-              = t :ubicacion
+              = t.ubicacion
               \:
             %td
               Capital Federal (Zona Alto Palermo)
@@ -56,7 +56,7 @@
               .purchase
                 %input#BidButtonTop.but_pri_1{ :type => "button", :value => "Comprar", :title => "Comprar" }
               %span.font11
-                = t :tucompra
+                = t.tucompra
                 \.
         .dashed
         .box
@@ -64,7 +64,7 @@
             %tbody
               %tr
                 %td{ :style => "padding-top: 2px;", :valign => "top", :width => "16%" }
-                  = t :vendedor
+                  = t.vendedor
                   \:
                 %td.datavend{ :valign => "top", :width => "84%" }
                   %div
@@ -76,10 +76,10 @@
                   %span.font11{ :style => "clear: both;" }
                   #CalifPercentage{ :style => "width: auto; clear: both;" }
                     #puntos
-                      = t :calificacion
+                      = t.calificacion
                       \:
                       = @customer.points
-                      = t :puntos
+                      = t.puntos
                     #posneg
                       #caja_pos
                         %span#link_pos
@@ -99,11 +99,11 @@
                         )
                   %br
                   %div{ :style => "clear: both;" }
-                    = t :ventas
+                    = t.ventas
                     \:
                     = @item.bids_count
                     %a{ :href => "" }
                   %br
 .font11.denunhd
-  = t :publicacion
+  = t.publicacion
   \#123456789
