@@ -20,7 +20,6 @@ class Main < Monk::Glue
 
   set :app_file, __FILE__
   use Rack::Session::Cookie
-  use Rack::Runtime
 end
 
 # Connect to Redis database.
