@@ -44,9 +44,9 @@ catalog:
     title: "Especificaciones"
     print: "Imprimir ficha tecnica"
   reviews:
-    tab:
-      one: "1 opinion"
-      other: '{{count}} opiniones'
+    tab: !!pl
+      1: "1 opinion"
+      n: %1 opiniones
     title: "Opiniones"
     promedio: "Promedio"
     resumen:

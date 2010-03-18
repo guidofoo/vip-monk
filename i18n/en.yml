@@ -36,7 +36,7 @@ preferencia_pago: "Shipping and payment preferences"
 texto_pago: "Payment"
 texto_envio: "Shipping"
 texto_cuotas: "Up to 12 payments with Hipotecario, Standard and Patagonia credit cards"
-hasta: until ${{valor}}
+hasta: until ${valor}}
 
 catalog:
   product:

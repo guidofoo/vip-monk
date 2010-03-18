@@ -21,7 +21,7 @@ class VIPTest < Test::Unit::TestCase
   feature "View item page" do
     setup do
       @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35
-      @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100
+      @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100#, email: "customer@email.com"
       @shipMethod = ShipMethod.create description: "A convenir"
       @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
       @product = CatalogProduct.create name: "Iphone mejor del mundo"
@@ -49,7 +49,7 @@ class VIPTest < Test::Unit::TestCase
       visit "/items/#{@item.id}"
 
       within ".price" do |scope|
-        assert_contain_in_scope scope, @item.price
+        assert_contain_in_scope scope, @item.price.to_i
       end
     end
 
@@ -83,16 +83,13 @@ class VIPTest < Test::Unit::TestCase
     end
 
 
-    # scenario "A user visiting the page should see the image" do
+    # scenario "A user visiting the page should see seller email" do
       # visit "/items/#{@item.id}"
 
-      # within "#divMainImg" do
-        # assert_contain @item.image
-      # within "#linkMainImg" do |scope|
-      #  58         assert_contain @item.image
+      # within "#divUserMail" do
+        # assert_contain @customer.email
       # end
-     # end
-   end
+    # end
+
+  end
 end
-
-
