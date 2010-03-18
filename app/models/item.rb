@@ -39,6 +39,10 @@ class Item < Sequel::Model
     xml
   end
 
+  def to_s
+    title
+  end
+
   # Trae los demas items de un customer
   def items_seller
     Item.filter(:customer_id => self.customer_id).exclude(:id => self.id)
