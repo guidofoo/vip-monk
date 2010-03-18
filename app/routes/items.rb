@@ -4,6 +4,12 @@ class Main
     @stamp = Time.new
   end
 
+  get "/items" do
+    @items = Item.all
+
+    haml :"items/index", :layout => false
+  end
+
   get "/items/:id.xml" do
     @item = Item[params[:id].to_i]
     content_type 'text/xml', :charset => 'utf-8'
@@ -16,7 +22,7 @@ class Main
     @item.to_json
   end
 
-  get "/items/:id" do    
+  get "/items/:id" do
     @item = Item[params[:id].to_i]
     @pageTitle = @item.title
     @customer = @item.customer
