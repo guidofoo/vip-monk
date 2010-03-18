@@ -1,3 +1,4 @@
 - for item in @items
   %p
-    %a{:title => item.title, :href => item.slug}=item.title
+    %a{:title => item.title, :href => url(:items, item)}=item.title
+    /=url(:items, item)
