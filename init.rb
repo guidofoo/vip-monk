@@ -14,6 +14,7 @@ require "haml"
 require "sass"
 require "sequel"
 require "sinatra/r18n"
+require "core_ext"
 
 class Main < Monk::Glue
   register Sinatra::R18n
