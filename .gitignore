@@ -4,6 +4,7 @@
 /db/redis/development
 /db/redis/test
 /db/development.db
+/db/production.db
 /db/test.db
 /tmp
 /webrat.log
