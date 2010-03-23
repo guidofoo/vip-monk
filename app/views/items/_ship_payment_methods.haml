@@ -5,7 +5,7 @@
     .titles2
       = t.texto_pago
     - for paymentMethod in @paymentMethods
-      %div{ :style => "margin-left: 10px;" }
+      #paymentMethodName{ :style => "margin-left: 10px;" }
         \-
         = paymentMethod.name
         %img{ :src => paymentMethod.logo }
@@ -37,9 +37,10 @@
     .dashedgreyline
     .titles2
       = t.texto_envio
-    - for shipMethod in @shipMethods
-      %div{ :style => "margin-left: 10px;" }
-        \-
-        = shipMethod.description
+    %span#shipMethodDesc
+      - for shipMethod in @shipMethods
+        %div{ :style => "margin-left: 10px;" }
+          \-
+          = shipMethod.description
     %br
     %div
