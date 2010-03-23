@@ -49,4 +49,10 @@ class Main
      haml :"items/show"
   end
 
+  # show the nickname if user has logged in ML
+  get "/user" do
+    @cookie = request.cookies["orgnickp"]
+
+    haml :"items/user", layout: false
+  end
 end
