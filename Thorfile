@@ -71,23 +71,27 @@ class Monk < Thor
     Question.delete
     Calification.delete
 
-    @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35
-    @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100, email: "customer@email.com"
-    @shipMethod = ShipMethod.create description: "A convenir"
-    @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
-    @product = CatalogProduct.create name: "Iphone mejor del mundo"
-    @attr = CatalogProductAttribute.create key: "MyKey", value: "MyValue"
-    @product.catalog_product_attributes << @attr
-    @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer, catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
-    @product.save
-    @question = Question.create item_id: @item.id, question: "pregunta loca", question_dt: Time.now, answer: "respuesta mas loca", answer_dt: Time.now
-    @calification = Calification.create customer_id: @customer.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
+    #TODO add param
+    1.times do
+      @site = Site.create site_id: "MLA", locale: "es"
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35, site: @site
+      @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100, email: "customer@email.com"
+      @shipMethod = ShipMethod.create description: "A convenir"
+      @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
+      @product = CatalogProduct.create name: "Iphone mejor del mundo"
+      @attr = CatalogProductAttribute.create key: "MyKey", value: "MyValue"
+      @product.add_catalog_product_attribute(@attr)
+      @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer, catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
+      @product.save
+      @question = Question.create item_id: @item.id, question: "pregunta loca", question_dt: Time.now, answer: "respuesta mas loca", answer_dt: Time.now
+      @calification = Calification.create customer_id: @customer.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
 
-    @item.catalog_product = @product
-    @item.payment_methods << @paymentMethod
-    @item.ship_methods << @shipMethod
-    @item.customer = @customer
-    @item.save
+      @item.catalog_product = @product
+      @item.add_payment_method(@paymentMethod)
+      @item.add_ship_method(@shipMethod)
+      @item.customer = @customer
+      @item.save
+    end
   end
 
 private
