@@ -45,7 +45,7 @@ class Item < Sequel::Model
 
   # Trae los demas items de un customer
   def items_seller
-    Item.filter(:customer_id => self.customer_id).exclude(:id => self.id)
+    Item.filter(:customer_id => self.customer_id).exclude(:id => self.id).limit(5)
   end
 
   def questions
@@ -54,5 +54,11 @@ class Item < Sequel::Model
 
   def price
     super.to_f
+  end
+
+  def validate
+    errors.add(:title, :not_present) if title.nil?
+    errors.add(:site_id, :not_present) if site_id.nil?
+    errors.add(:bids_count, :not_present) if bids_count.nil?
   end
 end
