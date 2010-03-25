@@ -55,4 +55,11 @@ class Main
 
     haml :"items/user", layout: false
   end
+
+  15.times do |i|
+    7.times do |j|
+      get "/resources#{i}/action#{j}" do
+      end
+    end
+  end
 end
