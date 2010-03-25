@@ -12,6 +12,11 @@ class Monk < Thor
     end
   end
 
+  desc "benchmark [URL|localhost:4567] [NUM|50]", "Run benchmarks NUM times against URL"
+  def benchmark(url = "http://localhost:4567", num = 50)
+    exec "bin/benchmark #{url} #{num}"
+  end
+
   desc "stories", "Run user stories."
   method_option :pdf, :type => :boolean
   def stories

@@ -1,0 +1,22 @@
+#! /bin/bash
+
+url=$1
+
+if [ -z "$url" ]; then
+  echo "Usage: benchmark URL"
+  exit 1
+fi
+
+total=${2:-50}
+echo "Requests: $total"
+
+runtime='/X-Runtime/ { print $3 }'
+
+stats='
+  BEGIN { total = 0; max = 0; min = 10 };
+        { total += $1; min = (min < $1) ? min : $1; max = (max > $1) ? max : $1}
+  END   { printf("Avg: %.6f\n", total / NR); printf("Min: %.6f\n", min); printf("Max: %.6f\n", max) }'
+
+for ((i=0; i < $total; i += 1)); do
+  (curl -v -s $url > /dev/null) 2>&1
+done | awk "$runtime" | awk "$stats"
