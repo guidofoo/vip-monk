@@ -57,8 +57,8 @@ class Monk < Thor
     Sequel::Migrator.apply(Sequel::Model.db, "db/migrations", version)
   end
 
-  desc "seed", "Add seed data to the database"
-  def seed
+  desc "seed [ITEMS]", "Add seed data to the database"
+  def seed(items = 1)
     #TODO add param for loop
     invoke :init
 
@@ -74,39 +74,41 @@ class Monk < Thor
     Site.delete
 
 
-    @site = Site.create site_id: "MLA", locale: "es"
-    @shipMethod = ShipMethod.create description: "A convenir"
-    @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
-    @product = CatalogProduct.create name: "Iphone mejor del mundo"
-    @attr = CatalogProductAttribute.create key: "Wifi", value: "(802.11b/g)"
-    @product.add_catalog_product_attribute(@attr)
-    @product.save
+    Sequel::Model.db.transaction do
+      @site = Site.create site_id: "MLA", locale: "es"
+      @shipMethod = ShipMethod.create description: "A convenir"
+      @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
+      @product = CatalogProduct.create name: "Iphone mejor del mundo"
+      @attr = CatalogProductAttribute.create key: "Wifi", value: "(802.11b/g)"
+      @product.add_catalog_product_attribute(@attr)
+      @product.save
 
-    1.times do |i|
-      @customer = Customer.create nickname: "customer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
-      @customer2 = Customer.create nickname: "otherCustomer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description",
-        image: "61826546_3253.jpg", bids_count: 35, site: @site, customer: @customer
+      items.to_i.times do |i|
+        @customer = Customer.create nickname: "customer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
+        @customer2 = Customer.create nickname: "otherCustomer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
+        @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description",
+          image: "61826546_3253.jpg", bids_count: 35, site: @site, customer: @customer
 
-      @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer,
-        catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
+        @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer,
+          catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
 
-      30.times do |j|
-        @question = Question.create item_id: @item.id, question: "preguntita#{j}", question_dt: Time.now, answer: "respuestita#{j}", answer_dt: Time.now
+        30.times do |j|
+          Question.create item_id: @item.id, question: "preguntita#{j}", question_dt: Time.now, answer: "respuestita#{j}", answer_dt: Time.now
+        end
+
+        @calification = Calification.create customer_id: @customer2.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
+
+        @item.catalog_product = @product
+        @item.add_payment_method(@paymentMethod)
+        @item.add_ship_method(@shipMethod)
+        @item.save
+
+        # 5.times do
+        #   Item.create title: "Mac Book Pro 13", price: 10000, description: "description",
+        #     image: "image.jpg", bids_count: 35, site: @site, customer: @customer
+        # end
+
       end
-
-      @calification = Calification.create customer_id: @customer2.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
-
-      @item.catalog_product = @product
-      @item.add_payment_method(@paymentMethod)
-      @item.add_ship_method(@shipMethod)
-      @item.save
-
-      5.times do
-        Item.create title: "Mac Book Pro 13", price: 10000, description: "description",
-          image: "image.jpg", bids_count: 35, site: @site, customer: @customer
-      end
-
     end
   end
 

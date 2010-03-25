@@ -12,7 +12,7 @@ class CatalogProduct < Sequel::Model
     end
     @prom = ((suma * 2) / self.reviews.length).round / 2.to_f
   end
-    
+
   def get_balls_image_link
     return @prom.to_s.delete "."
   end
