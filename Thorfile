@@ -64,7 +64,6 @@ class Monk < Thor
 
   desc "seed [ITEMS]", "Add seed data to the database"
   def seed(items = 1)
-    #TODO add param for loop
     invoke :init
 
     Item.delete
@@ -88,33 +87,35 @@ class Monk < Thor
       @product.add_catalog_product_attribute(@attr)
       @product.save
 
-      @customer_review = Customer.create nickname: "customerReview", points: 95, qty_calif: 100, email: "customer@email.com"
-      @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer_review,
+      @customer_review = Customer.create nickname: "customerReview", points: 95, qty_calif: 100, email: "customerReview@email.com"
+      @review = Review.create title: "Titulo de review", pros: "pros", contras: "contras", customer: @customer_review,
           catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
 
       items.to_i.times do |i|
         @customer = Customer.create nickname: "customer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
-        @customer2 = Customer.create nickname: "otherCustomer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
+        @customerCalif = Customer.create nickname: "otherCustomer#{i}", points: 95, qty_calif: 100, email: "customer@email.com"
+
         @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description",
           image: "61826546_3253.jpg", bids_count: 35, site: @site, customer: @customer
 
         30.times do |j|
-          Question.insert item_id: @item.id, question: "preguntita#{j}", question_dt: Time.now, answer: "respuestita#{j}", answer_dt: Time.now
+          Question.insert item_id: @item.id, question: "pregunta#{j}", question_dt: Time.now, answer: "respuesta#{j}", answer_dt: Time.now
         end
 
-        @calification = Calification.insert customer_id: @customer2.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
+        @calification = Calification.insert customer_id: @customerCalif.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
 
         @item.catalog_product = @product
         @item.add_payment_method(@paymentMethod)
         @item.add_ship_method(@shipMethod)
         @item.save
 
-        puts @item.id
+
         # 5.times do
         #   Item.create title: "Mac Book Pro 13", price: 10000, description: "description",
         #     image: "image.jpg", bids_count: 35, site: @site, customer: @customer
         # end
 
+        puts @item.id
       end
     end
   end
