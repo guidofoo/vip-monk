@@ -29,11 +29,11 @@
   #contenidoDatos
     %dl.datosProducto
       %dt
-        Precio:
+        = t.precio
       %dd
         %span.pesos
-          U$S
-          = @item.price.to_i
+          $
+          = @item.price
         %sup.centavos
           00
         %span.estado
@@ -70,12 +70,12 @@
             %a{ :href => "#" }
               MercadoPago
       %dt
-        Ubicacion:
+        = t.ubicacion
       %dd
         Buenos Aires (Banfield)
       %dt
         Vendidos:
-      %d
+      %dd
         = @item.bids_count.to_i
     %form.formComprar{ :method => "get", :action => "" }
       %input.btn_nivel1{ :type => "button", :value => "Comprar" }

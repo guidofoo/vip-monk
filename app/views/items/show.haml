@@ -1,17 +1,11 @@
-!= partial :'items/_item_header'
-!= partial :'items/_top_tabs'
-%br
-%br
-!= partial :'items/_ship_payment_methods'
-%br
-%br
-/
-  PREGUNTAS
-!= partial :'items/_questions'
-%br
-/
-  BOX EDUCATION
+#vip
+  != partial :'items/_item_header'
+  != partial :'items/_top_tabs'
+  != partial :'items/_ship_payment_methods'
+  != partial :'items/_questions'
 != partial :'items/_education'
-/
-  ART Vendedor
-!= partial :'items/_items_seller'
+/!= partial :'items/_items_seller'
+
+%script{ :type => "text/javascript" }
+  arr = ['http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_2330.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=69593925_9582.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_266.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_2330.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_9415.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_266.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_9415.jpg&v=M', 'http://www.mercadolibre.com.ar/jm/img?s=MLA&f=54593618_2330.jpg&v=M'];
+%script{ :type => "text/javascript", :src => "/assets/galeria.js" }

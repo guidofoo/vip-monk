@@ -1,11 +1,12 @@
-!!! :format :html4
-%html
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
   != partial :'common/_header'
   %body
     #layout
       != partial :'common/_ml_menu'
       != yield
       != partial :'common/_footer'
-  %center
-    gen:
-    = t.app.render_time % ((Time.now - @stamp)*1000)
+    %center
+      %br
+      gen:
+      = t.app.render_time % ((Time.now - @stamp)*1000)
