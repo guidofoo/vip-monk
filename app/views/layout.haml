@@ -1,14 +1,11 @@
-!!! Strict
+!!! :format :html4
 %html
   != partial :'common/_header'
   %body
-    %center
-      #containall
-        != partial :'common/_ml_menu'
-        != yield
-        != partial :'common/_footer'
-        %br
-        %br
-    %center
-      gen:
-      = t.app.render_time % ((Time.now - @stamp)*1000)
+    #layout
+      != partial :'common/_ml_menu'
+      != yield
+      != partial :'common/_footer'
+  %center
+    gen:
+    = t.app.render_time % ((Time.now - @stamp)*1000)
