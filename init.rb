@@ -22,6 +22,8 @@ class Main < Monk::Glue
   set :app_file, __FILE__
   use Rack::Session::Cookie
   use Rack::Runtime
+
+  set :haml, format: :html4
 end
 
 # Connect to Redis database.
