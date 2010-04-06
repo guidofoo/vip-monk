@@ -6,7 +6,7 @@
       - for category in @categories
         - if !category.category.nil?
           %img{ :src => "http://img.mlstatic.com/org-img/prod/arrow_categ.gif", :border => "0", :height => "10", :width => "13" }
-      
+
         %a.path1{ :href => "/jm/search?as_categ_id=#{category.id}" }
           = category.name
 /
@@ -54,7 +54,9 @@
                 %span#endtxt3.font11Grey
               %div{ :style => "margin-top: 8px;" }
               .purchase
-                %input#BidButtonTop.but_pri_1{ :type => "button", :value => "Comprar", :title => "Comprar" }
+                /%input#BidButtonTop.but_pri_1{ :type => "button", :value => "Comprar", :title => "Comprar" }
+                %form.formComprar{ :method => "get", :action => "/items/#{@item.id}/buy" }
+                  %input#BidButtonTop.but_pri_1{ :type => "submit", :value => "Comprar" }
               %span.font11
                 = t.tucompra
                 \.
