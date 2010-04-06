@@ -49,11 +49,12 @@ class Main
      haml :"items/show"
   end
 
-  # show the nickname if user has logged in ML
-  get "/user" do
-    @cookie = request.cookies["orgnickp"]
+  get "/items/:id/buy" do
+    require_login
+    @item = Item[params[:id].to_i]
+    @user = session[:user]
 
-    haml :"items/user", layout: false
+    haml :"items/buy", layout: false
   end
 
   15.times do |i|
@@ -62,4 +63,6 @@ class Main
       end
     end
   end
+
+
 end
