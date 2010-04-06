@@ -25,8 +25,10 @@ class Dep
     end
 
     def vendor_path
-      Dir[File.join("vendor", "#{vendor_name}*", "lib")].first ||
-        Dir[File.join("vendor", name, "lib")].first
+      # (Kernel.require "ruby-debug" and debugger) if name == "sinatra"
+      Dir[File.join("vendor", vendor_name, "lib")].first ||
+        Dir[File.join("vendor", name, "lib")].first ||
+        Dir[File.join("vendor", "#{vendor_name}*", "lib")].first
     end
 
     def require_vendor
