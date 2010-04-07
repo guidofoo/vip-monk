@@ -25,7 +25,7 @@ class Main < Monk::Glue
 end
 
 # Connect to Redis database.
-#Ohm.connect(settings(:redis))
+Ohm.connect(settings(:redis))
 
 # Connect to the Sqlite3 database.
 db = settings(:sequel)

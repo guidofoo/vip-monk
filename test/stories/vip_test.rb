@@ -7,7 +7,7 @@ class VIPTest < Test::Unit::TestCase
   end
 
   setup do
-    Item.delete
+    Ohm.flush
     Customer.delete
     ShipMethod.delete
     PaymentMethod.delete
@@ -34,8 +34,8 @@ class VIPTest < Test::Unit::TestCase
       @calification = Calification.create customer_id: @customer.id, item_id: @item.id, texto_calif: "todo barbaro", value_calif: 1, fecha: Time.now
 
       @item.catalog_product = @product
-      @item.add_payment_method(@paymentMethod)
-      @item.add_ship_method(@shipMethod)
+      @item.payment_methods.add(@paymentMethod)
+      @item.ship_methods.add(@shipMethod)
       @item.customer = @customer
       @item.save
     end
