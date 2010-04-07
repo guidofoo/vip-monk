@@ -20,7 +20,8 @@ class VIPTest < Test::Unit::TestCase
 
   feature "View item page" do
     setup do
-      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35
+      @site = Site.create site_id: "MLA", locale: "es"
+      @item = Item.create title: "iPod touch 32gb 3ra generacion, caja sellada", price: 100, description: "description", image: "image.jpg", bids_count: 35, site: @site
       @customer = Customer.create nickname: "MatataNoExiste", points: 95, qty_calif: 100, email: "mail@prueba.com"
       @shipMethod = ShipMethod.create description: "A convenir"
       @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
