@@ -12,7 +12,7 @@
   #Preguntasalvendedor.contentbox
     %a{ :name => "toQuest" }
     %div{ :style => "text-align:right; width:99%" }
-    - for question in @questions
+    - for question in @item.questions
       #bigQues
         %a{ :name => "toQuest" }
         #tableQues1.wrap1
@@ -54,7 +54,7 @@
             = t.califications.calif
           %div{ :style => "text-align: right;" }
           .wrap1
-            - for calification in @califications do
+            - for calification in @item.califications do
               .side-icon
                 - if calification.value_calif == 1 then
                   %img{ :src => "http://img.mlstatic.com/org-img/calif/pos_fb2.gif", :align => "absmiddle", :height => "16", :width => "16" }

@@ -14,7 +14,6 @@ class Item < Sequel::Model
   one_to_many :questions
   one_to_many :califications
 
-
   many_to_many :payment_methods
   many_to_many :ship_methods
 

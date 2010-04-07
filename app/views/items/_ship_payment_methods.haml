@@ -4,7 +4,7 @@
   %div{ :style => "margin-left: 10px;" }
     .titles2
       = t.texto_pago
-    - for paymentMethod in @paymentMethods
+    - for paymentMethod in @item.payment_methods
       #paymentMethodName{ :style => "margin-left: 10px;" }
         \-
         = paymentMethod.name
@@ -38,7 +38,7 @@
     .titles2
       = t.texto_envio
     %span#shipMethodDesc
-      - for shipMethod in @shipMethods
+      - for shipMethod in @item.ship_methods
         %div{ :style => "margin-left: 10px;" }
           \-
           = shipMethod.description

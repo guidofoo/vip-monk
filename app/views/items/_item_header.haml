@@ -72,7 +72,7 @@
                   %div
                     %span#Nickname
                       %span#MyNickname{ :style => "margin-top: 5px; display: inline; float: left; padding-bottom: 2px;" }
-                        = @customer.nickname
+                        = @item.customer.nickname
                       %span{ :title => "" }
                     %div{ :style => "clear: both;" }
                   %span.font11{ :style => "clear: both;" }
@@ -80,23 +80,23 @@
                     #puntos
                       = t.calificacion
                       \:
-                      = @customer.points.to_i
+                      = @item.customer.points.to_i
                       = t.puntos
                     #posneg
                       #caja_pos
                         %span#link_pos
-                          - if Integer(@customer.qty_calif) > 0 then
+                          - if Integer(@item.customer.qty_calif) > 0 then
                             (
-                            = Integer(@customer.points) * 100 / Integer(@customer.qty_calif)
-                            \%                          
+                            = Integer(@item.customer.points) * 100 / Integer(@item.customer.qty_calif)
+                            \%
                         %span#img_pos.pos
                         )
                       #caja_neg
                         %span#link_neg
-                          - if Integer(@customer.qty_calif) > 0 then
+                          - if Integer(@item.customer.qty_calif) > 0 then
                             (
-                            = 100 - Integer(@customer.points) * 100 / Integer(@customer.qty_calif)
-                            \%                        
+                            = 100 - Integer(@item.customer.points) * 100 / Integer(@item.customer.qty_calif)
+                            \%
                         %span#img_neg.neg
                         )
                   %br

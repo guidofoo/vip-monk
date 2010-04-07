@@ -11,8 +11,8 @@
     %li#HOpinionesdelproducto.TabbedPanelsTab{ :group => "description" }
       %a{ :href => "javascript:mostrarOpiniones();cambiarEstilos('HOpinionesdelproducto',0,'description')" }
         %span
-          %img{ :border => "0", :src => "http://img.mlstatic.com/org-img/listados/new/rank#{@product.get_balls_image_link}.gif" }
-          = t.catalog.reviews.tab(@reviews.length)
+          /%img{ :border => "0", :src => "http://img.mlstatic.com/org-img/listados/new/rank#{@item.catalog_product.get_balls_image_link}.gif" }
+          = t.catalog.reviews.tab(@item.catalog_product.reviews.length)
           /
             http://opinion.mercadolibre.com.ar/ipod-touch-32-gb-tercera-generacion-584879-VCP
 #descriptionCont
@@ -26,7 +26,7 @@
         %h2
           = t.catalog.product.title
       #attr
-        - for attribute in @catalogProductAttrs do
+        - for attribute in @item.catalog_product.catalog_product_attributes do
           %ul.ul_simple
             %li.li_simple
               %b
@@ -50,7 +50,7 @@
         %h3
           = t.catalog.reviews.promedio
         %span.promedio
-          %img{ :src => "http://img.mlstatic.com/org-img/reviews/#{@product.get_balls_image_link}BALLSON.gif", :align => "absbottom" }
+          /%img{ :src => "http://img.mlstatic.com/org-img/reviews/#{@item.catalog_product.get_balls_image_link}BALLSON.gif", :align => "absbottom" }
           %br
       #distribucion
         %h3
@@ -90,7 +90,7 @@
     .Spacer
     #list_reviews
       %a{ :name => "tab405825" }
-      - for review in @reviews do
+      - for review in @item.catalog_product.reviews do
         .contopinion
           .titcalif
             .opcalif

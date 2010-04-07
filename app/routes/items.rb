@@ -24,12 +24,6 @@ class Main
 
   get "/items/:id" do
     @item = Item[params[:id].to_i]
-    @pageTitle = @item.title
-    @customer = @item.customer
-    @questions = @item.questions
-    @califications = @item.califications
-    @shipMethods = @item.ship_methods
-    @paymentMethods = @item.payment_methods
 
     @categories = Array.new
     category = @item.category
@@ -38,15 +32,7 @@ class Main
       category = category.category
     end
 
-    @product = @item.catalog_product
-    @product.calculate_reviews_summary
-    @reviews = @product.reviews
-
-    @catalogProductAttrs = @product.catalog_product_attributes
-
-    @items_seller = @item.items_seller
-
-     haml :"items/show"
+    haml :"items/show"
   end
 
   get "/items/:id/buy" do
@@ -63,6 +49,5 @@ class Main
       end
     end
   end
-
 
 end
