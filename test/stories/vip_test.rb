@@ -11,11 +11,6 @@ class VIPTest < Test::Unit::TestCase
     Customer.delete
     ShipMethod.delete
     PaymentMethod.delete
-    CatalogProduct.delete
-    CatalogProductAttribute.delete
-    Review.delete
-    Question.delete
-    Calification.delete
   end
 
   feature "View item page" do
@@ -26,8 +21,8 @@ class VIPTest < Test::Unit::TestCase
       @shipMethod = ShipMethod.create description: "A convenir"
       @paymentMethod = PaymentMethod.create name: "visa", logo: "sarasa"
       @product = CatalogProduct.create name: "Iphone mejor del mundo"
-      @attr = CatalogProductAttribute.create key: "MyKey", value: "MyValue"
-      @product.add_catalog_product_attribute(@attr)
+      @attr = CatalogProductAttribute.create clave: "Myclave", valor: "MyValue", catalog_product: @product
+      # @product.add_catalog_product_attribute(@attr)
       @review = Review.create title: "Titulo de review", pros: "prossss", contras: "contrass", customer: @customer, catalog_product: @product, qty_votes: 10, qty_pos: 5, points: 4, conclusion: "conclusion"
       @product.save
       @question = Question.create item_id: @item.id, question: "pregunta para test", question_dt: Time.now, answer: "respuesta para test", answer_dt: Time.now
@@ -122,19 +117,19 @@ class VIPTest < Test::Unit::TestCase
       end
     end
 
-    scenario "A user visting the pague should see the product specifications" do
+    scenario "A user visting the page should see the product specifications" do
       visit "/items/#{@item.id}"
 
       within "#attr" do |scope|
-        assert_contain_in_scope scope, @item.catalog_product.catalog_product_attributes.first.key
+        assert_contain_in_scope scope, @item.catalog_product.catalog_product_attributes.first.clave
       end
 
       within "#attr" do |scope|
-        assert_contain_in_scope scope, @item.catalog_product.catalog_product_attributes.first.value
+        assert_contain_in_scope scope, @item.catalog_product.catalog_product_attributes.first.valor
       end
     end
 
-    scenario "A user visting the pague should see product reviews" do
+    scenario "A user visting the page should see product reviews" do
       visit "/items/#{@item.id}"
 
       within ".optitle" do |scope|

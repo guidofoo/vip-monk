@@ -1,22 +1,3 @@
-require 'json'
-require 'builder'
-require 'slug'
-require 'app/models/ship_method'
-require 'app/models/question'
-
-class Item < Ohm::Model
-  include Slug
-
-  attribute :title
-  attribute :price
-  attribute :bids_count
-  attribute :description
-  attribute :image
-
-  reference :customer, Customer
-  reference :site, Site
-  reference :category, Category
-  reference :catalog_product, CatalogProduct
 
   # many_to_one :customer
   # many_to_one :site
@@ -29,11 +10,12 @@ class Item < Ohm::Model
   # one_to_many :questions
   # one_to_many :califications
 
-  def califications
-    Calification.where(item_id: id)
-  end
+  collection :califications, Calification
+  collection :questions, Question
 
-  set :questions, Question
+  collection :questions do Question end
+  collection :questions, %s(Question)
+  collection :questions, -> (a, b) { Question }
 
   set :payment_methods, PaymentMethod
   set :ship_methods, ShipMethod
@@ -67,13 +49,11 @@ class Item < Ohm::Model
 
   # Trae los demas items de un customer
   def items_seller
-    # TODO Replace with Ohm code.
-    # Item.filter(:customer_id => self.customer_id).exclude(:id => self.id).limit(5)
     Item.find(customer_id: customer_id)
   end
 
   def questions
-    Question.filter(:item_id => self.id).limit(30)
+    Question.find(:item_id => self.id).sort(limit: 30)
   end
 
   # def price

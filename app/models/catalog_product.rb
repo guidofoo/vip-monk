@@ -1,8 +1,11 @@
-class CatalogProduct < Sequel::Model
-  one_to_many :items
-  one_to_many :catalog_product_attributes
-  one_to_many :reviews
+class CatalogProduct < Ohm::Model
+  attribute :name
 
+  # one_to_many :items
+  # one_to_many :catalog_product_attributes
+  def catalog_product_attributes
+    CatalogProductAttribute.find(catalog_product_id: id)
+  end
 
   # def calculate_reviews_summary 
     # suma = @qty5 = @qty4 = @qty3 = @qty2 = @qty1 = 0;
@@ -39,3 +42,9 @@ class CatalogProduct < Sequel::Model
   end
 
 end
+
+require "app/models/review"
+require "app/models/item"
+
+CatalogProduct.collection :reviews, Review
+CatalogProduct.collection :items, Item
