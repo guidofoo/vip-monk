@@ -1,11 +1,10 @@
 require 'json'
 require 'builder'
 require 'slug'
-require 'app/models/ship_method'
-require 'app/models/question'
 
 class Item < Ohm::Model
-    include Slug
+  extend Spawn
+  include Slug
 
   attribute :title
   attribute :price
@@ -86,4 +85,10 @@ class Item < Ohm::Model
     # errors.add(:site_id, :not_present) if site_id.nil?
     # errors.add(:bids_count, :not_present) if bids_count.nil?
   end
+end
+
+Item.spawner do |item|
+  item.site ||= Site.spawn
+  item.title = "iPod touch"
+  item.bids_count = 1
 end

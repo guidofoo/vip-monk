@@ -7,6 +7,6 @@ class Review < Ohm::Model
   attribute :qty_pos
   attribute :qty_votes
 
-  reference :customer, lambda { |id| Customer[id] }
-  reference :catalog_product, lambda { |id| CatalogProduct[id] }
+  reference :customer, Customer
+  reference :catalog_product, CatalogProduct
 end

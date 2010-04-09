@@ -13,6 +13,7 @@ require "ohm"
 require "haml"
 require "sass"
 require "sequel"
+require "spawn"
 require "sinatra/r18n"
 require "core_ext"
 

@@ -1,7 +1,12 @@
-class Customer < Sequel::Model
+class Customer < Ohm::Model
   # set_dataset dataset.sequence(:seq_customers_id)
-  one_to_many :items
-  one_to_many :califications
+  attribute :nickname
+  attribute :email
+  attribute :points
+  attribute :qty_calif
+  
+  collection :items, Item
+  collection :califications, Calification
 
   def validate
     error.add(:nickname, :not_present) if nickname.nil?

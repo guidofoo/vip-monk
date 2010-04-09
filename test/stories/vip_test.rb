@@ -8,7 +8,6 @@ class VIPTest < Test::Unit::TestCase
 
   setup do
     Ohm.flush
-    Customer.delete
     ShipMethod.delete
     PaymentMethod.delete
   end

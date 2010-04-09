@@ -3,5 +3,5 @@ class Question < Ohm::Model
   attribute :question_dt
   attribute :answer
   attribute :answer_dt
-  reference :item, lambda { |id| Item[id] }
+  reference :item, Item
 end
