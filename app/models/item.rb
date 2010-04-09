@@ -1,4 +1,22 @@
+require 'json'
+require 'builder'
+require 'slug'
+require 'app/models/ship_method'
+require 'app/models/question'
 
+class Item < Ohm::Model
+    include Slug
+
+  attribute :title
+  attribute :price
+  attribute :bids_count
+  attribute :description
+  attribute :image
+
+  reference :customer, Customer
+  reference :site, Site
+  reference :category, Category
+  reference :catalog_product, CatalogProduct
   # many_to_one :customer
   # many_to_one :site
   # many_to_one :category
@@ -13,9 +31,9 @@
   collection :califications, Calification
   collection :questions, Question
 
-  collection :questions do Question end
-  collection :questions, %s(Question)
-  collection :questions, -> (a, b) { Question }
+  # collection :questions do Question end
+  # collection :questions, %s(Question)
+  # collection :questions, -> (a, b) { Question }
 
   set :payment_methods, PaymentMethod
   set :ship_methods, ShipMethod
