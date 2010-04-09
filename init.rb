@@ -12,7 +12,7 @@ require "monk/glue"
 require "ohm"
 require "haml"
 require "sass"
-require "sequel"
+# require "sequel"
 require "spawn"
 require "sinatra/r18n"
 require "core_ext"
@@ -29,10 +29,10 @@ end
 Ohm.connect(settings(:redis))
 
 # Connect to the Sqlite3 database.
-db = settings(:sequel)
-Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db.merge(logger: logger)]) if db[:adapter]
+# db = settings(:sequel)
+# Sequel.send(db.delete(:adapter), *[db.delete(:database), db.empty? ? nil : db.merge(logger: logger)]) if db[:adapter]
 
-Sequel::Model.raise_on_save_failure = false
+# Sequel::Model.raise_on_save_failure = false
 
 # Load all application files.
 Dir[root_path("app/**/*.rb")].each do |file|

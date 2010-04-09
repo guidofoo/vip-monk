@@ -1,6 +1,8 @@
 require 'json'
 require 'builder'
 require 'slug'
+require "app/models/payment_method"
+require "app/models/ship_method"
 
 class Item < Ohm::Model
   extend Spawn

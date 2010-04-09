@@ -1,3 +1,4 @@
-class ShipMethod < Sequel::Model
-  many_to_many :items
+class ShipMethod < Ohm::Model
+  attribute :description
+  collection :items, Item
 end

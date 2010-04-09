@@ -1,3 +1,7 @@
-class PaymentMethod < Sequel::Model
-  many_to_many :items
+class PaymentMethod < Ohm::Model
+  attribute :name
+  attribute :logo
+  
+  collection :items, Item
+  
 end

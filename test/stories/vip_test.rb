@@ -8,8 +8,6 @@ class VIPTest < Test::Unit::TestCase
 
   setup do
     Ohm.flush
-    ShipMethod.delete
-    PaymentMethod.delete
   end
 
   feature "View item page" do

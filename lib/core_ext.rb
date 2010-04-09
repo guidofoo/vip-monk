@@ -1,4 +1,4 @@
-class Sequel::Model
+class Ohm::Model
   alias to_param id
 end
 

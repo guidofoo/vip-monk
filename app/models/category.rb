@@ -1,5 +1,6 @@
-class Category < Sequel::Model
-  many_to_one :category
-  one_to_many :items
-  one_to_many :categories
+class Category < Ohm::Model
+  attribute :name
+  reference :category, Category
+  collection :items, Item
+  collection :categories, Category
 end
